@@ -5,18 +5,22 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
+                <div class="card-header">{{ $main_word }} Materials</div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
-                    <a href="/material">Group一覧へ</a>
+                    
+                @foreach($materials as $material)
+                <div class="card-body">
+                    <ul>
+                        <li>{{ $material -> english }}</li>
+                        <li>{{ $material -> japanese }}</li>
+                        <li>{{ $material -> photo }}</li>
+                    </ul>    
                 </div>
+                @endforeach
                 
             </div>
         </div>

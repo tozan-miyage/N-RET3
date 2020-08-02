@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Material;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -12,9 +13,9 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Group $group)
     {
-        //
+       
     }
 
     /**
@@ -44,9 +45,10 @@ class GroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Request $request,Group $group)
     {
-        //
+        $materials = $group->materials()->groupBy('main_word')->get();
+        return view('groups.show',compact('materials'));
     }
 
     /**

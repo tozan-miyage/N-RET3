@@ -1,0 +1,41 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">N-RET Groups</div>
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                @foreach($groups as $group)
+                <div class="card-body d-flex ">
+                    <div class="ml-3">
+                        <form method="GET" action="{{ route('material.show',$group) }}">
+                            <button type="submit" class="btn btn-primary">{{ $group -> group_name }}</button>
+                        </form>
+                    </div>
+                    <div class="ml-3">
+                        <form method="GET" action="{{ route('group_edit',$group) }}">
+                            <button type="submit" class="btn btn-outline-warning">Edit</button>
+                        </form>
+                    </div>
+                    <div class="ml-3">
+                        <form action="{{ route('group_destroy',['id' => $group -> id ]) }}" method="POST" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else { return false };">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                @endforeach
+                
+            </div>
+            <a href="{{ route('group_create') }}"  class="ml-4">新規作成</a>
+        </div>
+    </div>
+</div>
+@endsection
