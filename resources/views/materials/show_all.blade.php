@@ -11,7 +11,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                  
                 @foreach($materials as $material)
                 <div class="card-body">
                     <ul class="list-group list-group-flush">

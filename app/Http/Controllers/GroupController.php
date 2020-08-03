@@ -15,7 +15,8 @@ class GroupController extends Controller
      */
     public function index(Group $group)
     {
-       
+        $groups = $group->get();
+        return view('group.index',compact('groups'));
     }
 
     /**
@@ -48,7 +49,7 @@ class GroupController extends Controller
     public function show(Request $request,Group $group)
     {
         $materials = $group->materials()->groupBy('main_word')->get();
-        return view('groups.show',compact('materials'));
+        return view('group.play',compact('materials'));
     }
 
     /**
@@ -83,5 +84,14 @@ class GroupController extends Controller
     public function destroy(Group $group)
     {
         //
+    }
+    
+    public function list(Request $request)
+    {
+        $material = Material::find($request->material_id);
+        $materials = Material::where('main_word','$material->main_word')->get();
+    
+        // return response()->json($materials);
+        return response()->json($request->inputs());
     }
 }

@@ -1,0 +1,331 @@
+/* -------index.htmlが主に対象--------- */
+
+body {
+  font-family: "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro",
+    "Hiragino Maru Gothic Pro", "ヒラギノ角ゴ Pro W3",
+    "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO";
+  width: 100%;
+}
+
+header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  position: fixed;
+  z-index: 10;
+  background: white;
+  opacity: 0.8;
+}
+
+header img {
+  display: block;
+  height: 60px;
+}
+
+header a {
+  margin-right: 30px;
+  text-decoration: none;
+}
+
+.container {
+  /* width: 100%; */
+  height: 800px;
+  background-image: url(../img/ryan-wallace-azA1hLbjBBo-unsplash.jpg);
+  background-size: cover;
+  position: relative;
+}
+
+h1 {
+  font-size: 128px;
+  color: white;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+.main_title {
+  position: absolute;
+  top: 170px;
+  left: 900px;
+}
+
+.main_title p {
+  font-size: 24px;
+  color: white;
+  margin: 10px 0px 0px 10px;
+  opacity: 0.8;
+}
+
+.play {
+  width: 400px;
+  padding: 5px;
+  border-radius: 50px;
+  margin-top: 100px;
+  margin-left: 5px;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.play:hover {
+  opacity: 1;
+}
+
+.container-herf {
+  height: 400px;
+  background: #f2f2f2;
+  color: #4f3e34;
+  text-align: center;
+}
+
+h2 {
+  font-size: 96px;
+  margin: 30px auto;
+}
+
+.fadein {
+  /* 画面外にいる状態 */
+  opacity: 0;
+  transform: translate(0, 50px);
+  transition: all 1000ms;
+}
+
+.fadein.scrollin {
+  /* 画面内に入った状態 */
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.explanation {
+  margin: 0 auto;
+  padding-top: 70px;
+}
+
+.explanation p {
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 2px;
+}
+
+.container-herf-white {
+  height: 400px;
+  color: #4f3e34;
+  text-align: center;
+}
+
+.illustration {
+  padding-top: 60px;
+}
+
+.illustration img {
+  display: block;
+  width: 339px;
+  height: 226px;
+  margin: 0px auto;
+}
+
+.illustration p {
+  font-size: 30px;
+  margin-top: 30px;
+  letter-spacing: 2px;
+}
+
+.pink {
+  color: #f7469b;
+}
+
+.yellow {
+  color: #f8e25d;
+}
+
+.blue {
+  color: #48ccf8;
+}
+
+.container-duble {
+  height: 820px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+
+.grouping {
+  width: 630px;
+  background-color: #f2f2f2;
+  text-align: center;
+  margin: 10px;
+}
+
+.grouping p {
+  font-size: 16px;
+}
+
+.grouping p+p {
+  margin-top: 10px;
+}
+
+.center-letter {
+  z-index: 5;
+  text-align: center;
+  font-size: 76px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-letter p:nth-child(2) {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.sample_image img{
+  display: block;
+  width: 80%;
+  height: 80%;
+  margin: 100px auto;
+}
+
+footer {
+  position: relative;
+}
+
+.overview {
+  color: white;
+  opacity: 0.8;
+  position: absolute;
+  top: 750px;
+  left: 600px;
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+  opacity: 0.8;
+}
+
+footer a:hover {
+  opacity: 1;
+}
+
+footer h1 {
+  font-size: 80px;
+  margin-top: 50px;
+  margin-left: -150px;
+}
+
+footer .play {
+  margin-top: 50px;
+  margin-left: 80px;
+}
+
+.modal {
+  display: none;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 6;
+}
+
+.modal__bg {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+}
+
+.modal__content {
+  background: #fff;
+  left: 50%;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 70%;
+  overflow: auto;
+}
+
+.modal__content a {
+  color: #4f3e34;
+}
+
+/* -------login.htmlが主な対象--------*/
+
+.form_main {
+  width: 70%;
+  height: 70%;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* opacity: 0.8; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-radius: 10px;
+}
+
+.entry,
+.login {
+  /* opacity: 0.8; */
+  width: 40%;
+  height: 70%;
+  background: whitesmoke;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.entry p,
+.login p {
+  margin: 30px;
+}
+
+input {
+  width: 80%;
+  height: 30px;
+  border-radius: 5px;
+}
+
+input.checkbox {
+  width: 15px;
+  height: 15px;
+}
+
+input.submit {
+  background-color: #f8e25d;
+}
+
+.login input.submit {
+  background-color: #48ccf8;
+}
+
+.information {
+  width: 90%;
+  height: 15%;
+  background: whitesmoke;
+  border-radius: 10px;
+  text-align: left;
+  letter-spacing: 1px;
+  font-size: 14px;
+  line-height: 20px;
+  position: relative;
+}
+
+.information ul {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10%;
+}
+
+ol {
+  list-style-type: decimal;
+}

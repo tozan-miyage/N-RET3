@@ -15,20 +15,20 @@
                 <div class="card-body d-flex ">
                     <div class="ml-3">
                         <form method="GET" action="{{ route('material.show',$group) }}">
-                            <button type="submit" class="btn btn-primary">{{ $group -> group_name }}</button>
+                            <button type="submit" class="btn btn-primary">{{ $group -> group_name }}一覧へ</button>
                         </form>
                     </div>
                     <div class="ml-3">
                         <form method="GET" action="{{ route('group_edit',$group) }}">
                             @csrf
-                            <button type="submit" class="btn btn-warning">Edit</button>
+                            <button type="submit" class="btn btn-warning">group_name編集</button>
                         </form>
                     </div>
                     <div class="ml-3">
                         <form action="{{ route('group_destroy',['id' => $group -> id ]) }}" method="POST" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else { return false };">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE"/>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger">Group削除</button>
                         </form>
                     </div>
                 </div>
