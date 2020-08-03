@@ -27,7 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // |        | GET|HEAD  | group/{group}          | group.show       | App\Http\Controllers\GroupController@show                              | web          |
 // |        | DELETE    | group/{group}          | group.destroy    | App\Http\Controllers\GroupController@destroy                           | web          |
 // |        | GET|HEAD  | group/{group}/edit     | group.edit       | App\Http\Controllers\GroupController@edit                              | web          |
-Route::POST('/material/all','MaterialController@show_all');
+Route::GET('/material/{material}/show','MaterialController@show_all')->name('material_show_all');
 Route::resource('/material','MaterialController');
 //          | POST      | material                 | material.store   | App\Http\Controllers\MaterialController@store                          | web          |
 //          | GET|HEAD  | material                 | material.index   | App\Http\Controllers\MaterialController@index                          | web          |

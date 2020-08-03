@@ -25,9 +25,12 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $group_id = $request->input('group_id');
+        $group = Group::find($group_id);
+        
+        return view('materials.create',compact('group'));
     }
     
     public function group_create()
@@ -41,9 +44,25 @@ class MaterialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Material $material)
     {
+        $material = new Material();
         
+        $material->group_id = $request->input('group_id');
+        
+        $material->main_word = $request->input('main_word');
+        
+        $material->english = $request->input('english');
+        
+        $material->japanese = $request->input('japanese');
+        
+        $material->photo = $request->input('photo');
+        
+        $material->save();
+        
+        $group = Group::find($material -> group_id);
+        
+        return redirect()->route('material.show',$group);
     }
     
     public function group_store(Request $request)
@@ -64,11 +83,13 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($material)
-    {  
-        $materials = Material::where('group_id',$material)->groupBy('main_word')->get();
-        // これだと、できない。なぜ・・・$materials = $group->materials()->groupBy('main_word')->get();
-        return view('materials.show',compact('materials'));
+    public function show($id)
+    {   
+        $group = Group::find($id);
+        $materials = Material::where('group_id',$id)->groupBy('main_word')->get();
+        
+        // $materials = $group->materials()->groupBy('main_word')->get();
+        return view('materials.show',compact('materials','group'));
     }
 
     public function show_all(Request $request,Material $material)
@@ -84,9 +105,10 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Material $material)
+    public function edit(Group $group,Material $material)
     {
-        //
+        $groups = $group->get();
+        return view('materials.edit',compact('material','groups'));
     }
     
     public function group_edit(Group $group)
@@ -103,7 +125,23 @@ class MaterialController extends Controller
      */
     public function update(Request $request, Material $material)
     {
-        //
+        $material->group_id = $request->input('group_id');
+        
+        $material->main_word = $request->input('main_word');
+        
+        $material->english = $request->input('english');
+        
+        $material->japanese = $request->input('japanese');
+        
+        $material->photo = $request->input('photo');
+        
+        $material->update();
+        
+        $main_word = $material->main_word;
+        $materials = Material::where('main_word',$main_word)->get();
+        
+        // return redirect()->route('material_show_all',['id'=>$material->id]);
+        return view('materials.show_all',compact('materials','main_word'));
     }
 
     public function group_update(Request $request, Group $group)
@@ -124,12 +162,18 @@ class MaterialController extends Controller
      */
     public function destroy(Material $material)
     {
+        $main_word = $material->main_word;
+        $material->delete();
+        $materials = $material -> where('main_word',$main_word)->get();
         
+        return view('materials.show_all',compact('materials','main_word'));
+        // return redirect()->route('material.index');
     }
     
     public function group_destroy(Group $group)
     {
         $group->delete();
+        $group->materials()->delete();
         
         return redirect()->route('material.index');
     }

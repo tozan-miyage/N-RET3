@@ -20,21 +20,22 @@
                     </div>
                     <div class="ml-3">
                         <form method="GET" action="{{ route('group_edit',$group) }}">
-                            <button type="submit" class="btn btn-outline-warning">Edit</button>
+                            @csrf
+                            <button type="submit" class="btn btn-warning">Edit</button>
                         </form>
                     </div>
                     <div class="ml-3">
                         <form action="{{ route('group_destroy',['id' => $group -> id ]) }}" method="POST" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else { return false };">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE"/>
-                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
                 @endforeach
                 
             </div>
-            <a href="{{ route('group_create') }}"  class="ml-4">新規作成</a>
+            <a href="{{ route('group_create') }}"  class="m-5 mt-5">New Group</a>
         </div>
     </div>
 </div>

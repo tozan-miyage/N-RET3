@@ -21,7 +21,7 @@
                 </div>
 
             </div>
-            <a href=""></a>
+            <a href="{{ route('material.index') }}">一覧へ戻る</a>
         </div>
     </div>
 </div>
