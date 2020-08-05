@@ -7,8 +7,28 @@
 //   }
 // };
 // checkBrowser();
-
-
+$(document).ready(function() {
+            //formのmain_word_btn要素を取得・submitでイベント発火
+            $("form.main_word_btn").submit(function(e){
+            　　//元々のイベントは、発火しないようにする。
+                e.preventDefault();
+            　　//dataobjectに、formの内容を格納（データを文字列に変換）serealize()
+                let dataobject = $(this).serialize();
+            　　//ここまでの動作を確認済み
+                // console.log(dataobject);
+                //URI(/api/materialapi）に接続・dataobjectを渡す      
+            　  $.post('/api/materialapi',dataobject).done(function(data){
+            　  //ここまでの動作を確認済み
+                // console.log(data);
+                // $("#en_text").text(data[0].english);
+                 
+                 
+                // const test = data[0].english;
+                // const testj = data[0].japanese;
+                // const testp = data[0].photo;
+                // console.log (test);
+                // console.log (testj);
+                // console.log (testp)
 // html要素取得
 const img_text = document.getElementById("img_text");
 const en_text = document.getElementById("en_text");
@@ -18,7 +38,6 @@ const navi = document.getElementById("navi");
 const alerts = document.getElementById("alerts");
 const change = document.getElementById("change");
 
-// const material = data;
 
 // 素材ををセット
 
@@ -35,10 +54,8 @@ const en_text_subject = [
   "Walnuts are delicious to eat with their shells",
   "My dad is Baikinman",
   "I can't close my armpit",
-  // material,では、使えない
   "How to make Anpanman",
 ];
-
 
 
 const ja_text_subject = [
@@ -50,12 +67,12 @@ const ja_text_subject = [
 ];
 
 // 素材の表示
-let num = 0;
+
 const set_img = (num) => {
   img_text.src = img_subject[num];
 };
 
-const set_en = (num) => {
+const set_en = () => {
   en_text.textContent = en_text_subject[num];
 };
 
@@ -127,7 +144,7 @@ const navi_message = (message) => {
 };
 
 // ロジック
-
+let num = 0;
 const game_set = (num) => {
   set_img(num);
   set_en(num);
@@ -200,3 +217,15 @@ window.addEventListener("keydown", (e) => {
     navi_message("Let's tyaping");
   }
 });
+                 
+            　  });
+            });
+        });
+
+
+
+
+
+
+
+
