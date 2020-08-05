@@ -76,12 +76,10 @@
             　  $.post('/api/materialapi',dataobject).done(function(data){
             　  //ここまでの動作を確認済み
                  console.log(data);
-                 
-                 const materials = json_decode(data);
-                 
-                 conlole.log(materials);
-                 
-              });
+                 $("#en_text").text(data[0].english);
+                
+            　  
+            　  });
             });
         });
         </script>

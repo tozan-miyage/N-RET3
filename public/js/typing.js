@@ -18,6 +18,8 @@ const navi = document.getElementById("navi");
 const alerts = document.getElementById("alerts");
 const change = document.getElementById("change");
 
+// const material = data;
+
 // 素材ををセット
 
 const img_subject = [
@@ -33,6 +35,7 @@ const en_text_subject = [
   "Walnuts are delicious to eat with their shells",
   "My dad is Baikinman",
   "I can't close my armpit",
+  // material,では、使えない
   "How to make Anpanman",
 ];
 
