@@ -17,7 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('materialapi',[
+//materialapiでURIが送られてきたら、
+Route::post('/materialapi',[
+    // GroupController@listメソッドを実行
     'uses' => 'GroupController@list',
+    // route('list.material');でルートを定義できる
     'as' => 'list.material'
     ]);

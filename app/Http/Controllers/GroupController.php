@@ -88,10 +88,16 @@ class GroupController extends Controller
     
     public function list(Request $request)
     {
+        //リクエストのidと同じデータをMaterialモデルから取得
         $material = Material::find($request->material_id);
-        $materials = Material::where('main_word','$material->main_word')->get();
-    
-        // return response()->json($materials);
-        return response()->json($request->inputs());
+        //main_wordを格納
+        $main_word = $material->main_word;
+        //main_wordが同じレコードを取得して格納
+        $materials = Material::where('main_word',$main_word)->get();
+        // json形式で返す※dataobjectに格納される
+        return response()->json($materials);
+        
+        //500エラー
+        // return response()->json($request->inputs());
     }
 }

@@ -36,6 +36,8 @@ const en_text_subject = [
   "How to make Anpanman",
 ];
 
+
+
 const ja_text_subject = [
   "私は瞬きで卵を割ることができます。",
   "くるみは、殻ごと食べるのが美味しい。",
