@@ -29,18 +29,18 @@
                     <div class="how_to_contents">
                         <!-- 課題の写真 -->
                         <div class="theme_img">
-                            <img id="img_text" src="" alt="イメージ画像が入ります" />
+                            <img id="img_text" src="../img/vishwanath-surpur-MaXtz1BRD08-unsplash.jpg" alt="イメージ画像が入ります" />
                         </div>
 
                         <!-- 写真を説明する英文 -->
                         <div id="theme_text_en" class="theme_text_en">
-                            <p id="en_text"></p>
+                            <p id="en_text">Choose a word from the left menu</p>
                         </div>
 
                         <!-- タイピング -->
                         <div>
                             <span id="change"></span>
-                            <p id="target">ok</p>
+                            <p id="target">左Menuから単語を選ぼう</p>
                         </div>
 
                         <div id="navi_area">
@@ -61,9 +61,10 @@
             </div>
         @endsection
 
-        @section('js')
+        <!--@section('js')-->
         <script type="text/javascript">
         //documentが読み込まれてから実行する。
+
         $(document).ready(function() {
             //formのmain_word_btn要素を取得・submitでイベント発火
             $("form.main_word_btn").submit(function(e){
@@ -72,7 +73,7 @@
             　　//dataobjectに、formの内容を格納（データを文字列に変換）serealize()
                 let dataobject = $(this).serialize();
             　　//ここまでの動作を確認済み
-                console.log(dataobject);
+                // console.log(dataobject);
                 //URI(/api/materialapi）に接続・dataobjectを渡す      
             　  $.post('/api/materialapi',dataobject).done(function(data){
             　  //ここまでの動作を確認済み
