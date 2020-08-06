@@ -5,31 +5,37 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ $group -> group_name }} New Material</div>
+                <div class="card-header"> New Material</div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
                 <div class="card-body d-flex">
-                    <form action="{{ route('material.store') }}" method="POST">
+                    <form enctype="multipart/form-data" action="{{ route('material.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="group_id" value="{{ $group->id }}">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">main_word</span>
-                                    </div>
-                                        <input type="text" name="main_word" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                                </div>
-                            </li>
-                            <li class="list-group-item">
+                         <select name="group_id"
+                         class="form-control" id="exampleFormControlSelect1">
+                          @foreach($groups as $group)
+                            <option value="{{$group->id }}">{{$group->group_name}}</option>
+                          @endforeach
+                        </select>
+                        
+                         <ul class="list-group list-group-flush">
+                           <li class="list-group-item">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">english</span>
                                     </div>
-                                        <input type="text" name="english" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                        <input type="text" name="english" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
+                                </div>
+                            </li>
+                          <li class="list-group-item">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">main_word</span>
+                                    </div>
+                                        <input type="text" name="main_word" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                                 </div>
                             </li>
                             <li class="list-group-item">

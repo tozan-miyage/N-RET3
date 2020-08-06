@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Material;
 use App\Group;
+use Validator;
+
 
 class MaterialController extends Controller
 {
@@ -13,11 +17,12 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Material $material,Group $group)
+    public function index(Material $material)
     {
-        $groups = $group->get();
+        // $groups = $group->get();
        
-        return view('materials.index',compact('groups'));
+       $materials = Material::orderBy('created_at','DESC')->get();
+        return view('materials.index',compact('materials'));
     }
 
     /**
@@ -27,10 +32,13 @@ class MaterialController extends Controller
      */
     public function create(Request $request)
     {
-        $group_id = $request->input('group_id');
-        $group = Group::find($group_id);
+        // $group_id = $request->input('group_id');
+        // $group = Group::find($group_id);
         
-        return view('materials.create',compact('group'));
+        $groups = Group::all();
+       
+        // return view('materials.create',compact('group'));
+        return view('materials.create',compact('groups'));
     }
     
     public function group_create()
@@ -47,6 +55,27 @@ class MaterialController extends Controller
     public function store(Request $request,Material $material)
     {
         $material = new Material();
+        if ($request->hasFile('photo')) {
+            //  Let's do everything here
+            if ($request->file('photo')->isValid()) {
+                //
+                $validated = $request->validate([
+                    'image' => 'mimes:jpeg,png',
+                ]);
+                $extension = $request->photo->extension();
+                $name = "group-image-".time().".".$extension;
+                
+                $request->photo->storeAs('/public', $name);
+                $url = Storage::url($name);
+                // $file = File::create([
+                //   'name' => $name,
+                //     'url' => $url,
+                // ]);
+                $material->photo =  $url;
+              
+               
+            }
+        }
         
         $material->group_id = $request->input('group_id');
         
@@ -56,7 +85,7 @@ class MaterialController extends Controller
         
         $material->japanese = $request->input('japanese');
         
-        $material->photo = $request->input('photo');
+        // $material->photo = $request->input('photo');
         
         $material->save();
         
@@ -107,6 +136,8 @@ class MaterialController extends Controller
      */
     public function edit(Group $group,Material $material)
     {
+         
+       
         $groups = $group->get();
         return view('materials.edit',compact('material','groups'));
     }

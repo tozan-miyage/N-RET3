@@ -62,8 +62,6 @@
                                         <span class="input-group-text" id="inputGroupFileAddon01">Photo file</span>
                                     </div>
                                     <div class="custom-file">
-                                        <img src="{{ $material->photo }}" width="200" height="200"/>
-                                      
                                         <input type="file" name="photo" value="{{ $material->photo }}"class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
                                         <label class="custom-file-label" for="inputGroupFile01"></label>
                                     </div>

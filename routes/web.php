@@ -20,7 +20,7 @@ Auth::routes();
 Route::GET('/home', 'HomeController@index')->name('home');
 
 // MaterialモデルCRUD
-Route::resource('/material','MaterialController');
+Route::resource('/material','MaterialController')->middleware('auth');
 // | POST      | material                 | material.store   | App\Http\Controllers\MaterialController@store                          | web          |
 // | GET|HEAD  | material                 | material.index   | App\Http\Controllers\MaterialController@index                          | web          |
 // | GET|HEAD  | material/create          | material.create  | App\Http\Controllers\MaterialController@create                         | web          |
