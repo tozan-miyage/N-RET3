@@ -61,11 +61,12 @@ class MaterialController extends Controller
                 //
                 $validated = $request->validate([
                     'image' => 'mimes:jpeg,png',
-                ]);
+                ]);//拡張子extension
                 $extension = $request->photo->extension();
                 $name = "group-image-".time().".".$extension;
                 
                 $request->photo->storeAs('/public', $name);
+                
                 $url = Storage::url($name);
                 // $file = File::create([
                 //   'name' => $name,

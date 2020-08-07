@@ -9,6 +9,12 @@
 // checkBrowser();
 
 $(document).ready(function() {
+
+  // データを格納する変数を宣言
+  const en_text_subject = [];
+  const ja_text_subject = [];
+  const img_subject = [];
+
   //formのmain_word_btn要素を取得・submitでイベント発火
   $("form.main_word_btn").submit(function(e) {　　
     //元々のイベントは、発火しないようにする。
@@ -23,24 +29,33 @@ $(document).ready(function() {
       //ここまでの動作を確認済み
       // console.log(data);
       // $("#en_text").text(data[0].english);
+      　　　 // let array = [
+      　　　 //   {key1: 1, key2: 2, key3: 3},
+      　　　 //   {key1: 1, key2: 2, key3: 3}
+      // ]
 
+      data.forEach(elm => {
+        Object.keys(elm).forEach(key => {
+          const en_text_subject = elm[key]['english'];
+          const ja_text_subject = elm[key]['japanese'];
+          const img_text = elm[key]['photo'];
+        })
+      })
       // 素材の配列を宣言
-      const en_text_subject = [];
-      const ja_text_subject = [];
-      const img_subject = [];
 
 
-      for (let i = 0; i < data.length; i++) {
 
-        en_text_subject.push(data[i]['english']);
+      // for (let i = 0; i < data.length; i++) {
 
-        ja_text_subject.push(data[i]['japanese']);
+      //   en_text_subject.push(data[i]['english']);
 
-        let imageDataName = data[i]['photo'];
+      //   ja_text_subject.push(data[i]['japanese']);
 
-        img_subject.push(`../img/${imageDataName}`);
+      //   let imageDataName = data[i]['photo'];
 
-      }
+      //   img_subject.push(`../img/${imageDataName}`);
+
+      // }
 
       console.log(en_text_subject);
       console.log(ja_text_subject);
