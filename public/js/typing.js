@@ -10,13 +10,17 @@
 
 $(document).ready(function() {
 
-  // データを格納する変数を宣言
-  const en_text_subject = [];
-  const ja_text_subject = [];
-  const img_subject = [];
+  // データを格納する変数を宣言 constにするとエラーが起きる。なぜ？
+  let en_text_subject = [];
+  let ja_text_subject = [];
+  let img_subject = [];
 
   //formのmain_word_btn要素を取得・submitでイベント発火
-  $("form.main_word_btn").submit(function(e) {　　
+  $("form.main_word_btn").submit(function(e) {
+    // 一度クリア
+    en_text_subject = [];
+    ja_text_subject = [];
+    img_subject = [];
     //元々のイベントは、発火しないようにする。
     e.preventDefault();　　
     //dataobjectに、formの内容を格納（データを文字列に変換）serealize()
@@ -34,15 +38,42 @@ $(document).ready(function() {
       　　　 //   {key1: 1, key2: 2, key3: 3}
       // ]
 
-      data.forEach(elm => {
-        Object.keys(elm).forEach(key => {
-          const en_text_subject = elm[key]['english'];
-          const ja_text_subject = elm[key]['japanese'];
-          const img_text = elm[key]['photo'];
-        })
-      })
-      // 素材の配列を宣言
+      // data.forEach(elm => {
+      //   Object.keys(elm).forEach(key => {
+      //     en_text_subject = elm[key]['english'];
+      //     ja_text_subject = elm[key]['japanese'];
+      // img_subject = elm[key]['photo'];
+      // console.log(en_text_subject);
+      // console.log(ja_text_subject);
+      // console.log(img_subject);
+      //   });
+      // });
 
+      //data(オブジェクトで取得)を回す
+      data.forEach(object => {
+        // オブジェクトのkeyを配列として取得し回す
+        Object.keys(object).forEach(key => {
+          // もし、keyがenglishだったら、
+          if (key == "english") {
+            // objectのenglishの値を配列にpush
+            en_text_subject.push(object[key]);
+          }
+          else if (key == "japanese") {
+            ja_text_subject.push(object[key]);
+
+          }
+          else if (key == "photo") {
+            img_subject.push(object[key]);
+          }
+          else {
+
+          }
+        });
+      });
+
+      console.log(en_text_subject);
+      console.log(ja_text_subject);
+      console.log(img_subject);
 
 
       // for (let i = 0; i < data.length; i++) {
@@ -57,9 +88,7 @@ $(document).ready(function() {
 
       // }
 
-      console.log(en_text_subject);
-      console.log(ja_text_subject);
-      console.log(img_subject);
+
 
       const img_text = document.getElementById("img_text");
       const en_text = document.getElementById("en_text");
@@ -225,6 +254,7 @@ $(document).ready(function() {
     });
   });
 });
+
 // html要素取得
 // const img_text = document.getElementById("img_text");
 // const en_text = document.getElementById("en_text");

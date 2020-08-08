@@ -16,7 +16,7 @@
                 <div class="card-body d-flex">
                     <form action="{{ route('material.create') }}" method="GET">
                         @csrf
-                        <input type="hidden" name="group_id" value="{{ $group->id }}">
+                        <input type="hidden" name = "id" value = "{{ $group -> id }}">
                         <button type="submit" class="btn btn-primary m-2">New Create</button>
                     </form>  
                     @foreach($materials as $material)
@@ -24,6 +24,7 @@
                         <form method="GET" action="{{ route('material_show_all',$material) }}">
                             @csrf
                             <input type="hidden" name="main_word" value="{{ $material -> main_word }}"/>
+                            <input type="hidden" name="group_id" value="{{ $material -> group_id}}"/>
                             <button type="submit" class="btn btn-secondary">{{ $material -> main_word }}</button>
                         </form>
                     </div>

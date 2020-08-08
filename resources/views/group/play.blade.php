@@ -60,29 +60,3 @@
                 <!--</div>-->
             </div>
         @endsection
-
-        <!--@section('js')-->
-        <script type="text/javascript">
-        //documentが読み込まれてから実行する。
-
-        $(document).ready(function() {
-            //formのmain_word_btn要素を取得・submitでイベント発火
-            $("form.main_word_btn").submit(function(e){
-            　　//元々のイベントは、発火しないようにする。
-                e.preventDefault();
-            　　//dataobjectに、formの内容を格納（データを文字列に変換）serealize()
-                let dataobject = $(this).serialize();
-            　　//ここまでの動作を確認済み
-                // console.log(dataobject);
-                //URI(/api/materialapi）に接続・dataobjectを渡す      
-            　  $.post('/api/materialapi',dataobject).done(function(data){
-            　  //ここまでの動作を確認済み
-                 console.log(data);
-                 $("#en_text").text(data[0].english);
-                
-            　  
-            　  });
-            });
-        });
-        </script>
-        @endsection

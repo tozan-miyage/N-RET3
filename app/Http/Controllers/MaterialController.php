@@ -17,12 +17,12 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Material $material)
+    public function index(Material $material,Group $group)
     {
-        // $groups = $group->get();
+        $groups = $group->get();
        
-       $materials = Material::orderBy('created_at','DESC')->get();
-        return view('materials.index',compact('materials'));
+    //   $materials = Material::orderBy('created_at','DESC')->get();
+        return view('materials.index',compact('groups'));
     }
 
     /**
@@ -32,13 +32,13 @@ class MaterialController extends Controller
      */
     public function create(Request $request)
     {
-        // $group_id = $request->input('group_id');
+        $id = $request->input('id');
         // $group = Group::find($group_id);
         
-        $groups = Group::all();
-       
+        $group = Group::find($id);
+        
         // return view('materials.create',compact('group'));
-        return view('materials.create',compact('groups'));
+        return view('materials.create',compact('group'));
     }
     
     public function group_create()
@@ -55,6 +55,7 @@ class MaterialController extends Controller
     public function store(Request $request,Material $material)
     {
         $material = new Material();
+        
         if ($request->hasFile('photo')) {
             //  Let's do everything here
             if ($request->file('photo')->isValid()) {
@@ -73,8 +74,6 @@ class MaterialController extends Controller
                 //     'url' => $url,
                 // ]);
                 $material->photo =  $url;
-              
-               
             }
         }
         
@@ -115,17 +114,18 @@ class MaterialController extends Controller
      */
     public function show($id)
     {   
-        $group = Group::find($id);
-        $materials = Material::where('group_id',$id)->groupBy('main_word')->get();
         
+        $materials = Material::where('group_id',$id)->groupBy('main_word')->get();
+        $group = Group::find($id);
         // $materials = $group->materials()->groupBy('main_word')->get();
         return view('materials.show',compact('materials','group'));
     }
 
     public function show_all(Request $request,Material $material)
     {
+        $group_id = $request->input('group_id');
         $main_word = $request->input('main_word');
-        $materials = $material -> where('main_word',$main_word)->get();
+        $materials = $material -> where('group_id',$group_id)->where('main_word',$main_word)->get();
         
         return view('materials.show_all',compact('materials','main_word'));
     }
@@ -137,8 +137,6 @@ class MaterialController extends Controller
      */
     public function edit(Group $group,Material $material)
     {
-         
-       
         $groups = $group->get();
         return view('materials.edit',compact('material','groups'));
     }
@@ -157,6 +155,29 @@ class MaterialController extends Controller
      */
     public function update(Request $request, Material $material)
     {
+        if ($request->hasFile('photo')) {
+            //  Let's do everything here
+            if ($request->file('photo')->isValid()) {
+                //
+                $validated = $request->validate([
+                    'image' => 'mimes:jpeg,png',
+                ]);//拡張子extension
+                $extension = $request->photo->extension();
+                $name = "group-image-".time().".".$extension;
+                
+                $request->photo->storeAs('/public', $name);
+                
+                $url = Storage::url($name);
+                // $file = File::create([
+                //   'name' => $name,
+                //     'url' => $url,
+                // ]);
+                $material->photo =  $url;
+              
+               
+            }
+        }
+        
         $material->group_id = $request->input('group_id');
         
         $material->main_word = $request->input('main_word');
@@ -165,11 +186,12 @@ class MaterialController extends Controller
         
         $material->japanese = $request->input('japanese');
         
-        $material->photo = $request->input('photo');
+        // $material->photo = $request->input('photo');
         
         $material->update();
         
         $main_word = $material->main_word;
+        
         $materials = Material::where('main_word',$main_word)->get();
         
         // return redirect()->route('material_show_all',['id'=>$material->id]);
