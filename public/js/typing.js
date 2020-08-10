@@ -21,28 +21,27 @@ $(document).ready(function() {
     en_text_subject = [];
     ja_text_subject = [];
     img_subject = [];
+    
     //元々のイベントは、発火しないようにする。
     e.preventDefault();　　
+    
     //dataobjectに、formの内容を格納（データを文字列に変換）serealize()
     let dataobject = $(this).serialize();
-    //ここまでの動作を確認済み
-    // console.log(dataobject);
+    
     //URI(/api/materialapi）に接続・dataobjectを渡す      
-    　
     $.post('/api/materialapi', dataobject).done(function(data) {　
-      //ここまでの動作を確認済み
-      // console.log(data);
+      
       // $("#en_text").text(data[0].english);
       　　　 // let array = [
       　　　 //   {key1: 1, key2: 2, key3: 3},
       　　　 //   {key1: 1, key2: 2, key3: 3}
       // ]
-
+      //うまくいかない↓
       // data.forEach(elm => {
       //   Object.keys(elm).forEach(key => {
       //     en_text_subject = elm[key]['english'];
       //     ja_text_subject = elm[key]['japanese'];
-      // img_subject = elm[key]['photo'];
+      //     img_subject = elm[key]['photo'];
       // console.log(en_text_subject);
       // console.log(ja_text_subject);
       // console.log(img_subject);
@@ -70,12 +69,8 @@ $(document).ready(function() {
           }
         });
       });
-
-      console.log(en_text_subject);
-      console.log(ja_text_subject);
-      console.log(img_subject);
-
-
+      
+      //これでも、うまくいく↓
       // for (let i = 0; i < data.length; i++) {
 
       //   en_text_subject.push(data[i]['english']);
@@ -88,18 +83,18 @@ $(document).ready(function() {
 
       // }
 
-
-
       const img_text = document.getElementById("img_text");
       const en_text = document.getElementById("en_text");
       const target = document.getElementById("target");
       const logo_img = document.getElementById("logo_img");
       const navi = document.getElementById("navi");
       const alerts = document.getElementById("alerts");
-      const change = document.getElementById("change");　　
+      const change = document.getElementById("change");
+      const main_word = document.getElementById("main_word")
 
       // 素材の表示
       let num = 0;
+      
       const set_img = (num) => {
         img_text.src = img_subject[num];
       };
@@ -201,13 +196,7 @@ $(document).ready(function() {
       window.addEventListener("keydown", (e) => {
         let key = e.key;
         let targetKey = en_text_subject[num][loc];
-        // コードを取得する関数を用意してみたけど、、、
-        // let keycode = change.textContent.charCodeAt(loc);
-        // let targetKeycode = targetKey.charCodeAt(loc);
-        // let keyCode = key.charCodeAt();
-        // console.log(targetKeyCode);
-        // || keyCode === targetKeyCode - 0xFEE0
-        // || keycode === targetKeycode -65248
+
 
         logo_yellow();
         navi_message("まねしてタイプ！");
@@ -254,43 +243,3 @@ $(document).ready(function() {
     });
   });
 });
-
-// html要素取得
-// const img_text = document.getElementById("img_text");
-// const en_text = document.getElementById("en_text");
-// const target = document.getElementById("target");
-// const logo_img = document.getElementById("logo_img");
-// const navi = document.getElementById("navi");
-// const alerts = document.getElementById("alerts");
-// const change = document.getElementById("change");
-
-// const material = data;
-
-// 素材ををセット
-
-// const img_subject = [
-//   "../img/hannah-tasker-ZBkH8G4_yyE-unsplash.jpg",
-//   "../img/austin-pacheco-FtL07GM9Q7Y-unsplash.jpg",
-//   "../img/steven-libralon-Do1GQljlNk8-unsplash.jpg",
-//   "../img/ben-white-lVCHfXn3VME-unsplash.jpg",
-//   "../img/jason-rosewell--iAgKHaNUqI-unsplash.jpg",
-// ];
-
-// const en_text_subject = [
-//   "I can break an egg in the blink of an eye",
-//   "Walnuts are delicious to eat with their shells",
-//   "My dad is Baikinman",
-//   "I can't close my armpit",
-//   // material,では、使えない
-//   "How to make Anpanman",
-// ];
-
-
-
-// const ja_text_subject = [
-//   "私は瞬きで卵を割ることができます。",
-//   "くるみは、殻ごと食べるのが美味しい。",
-//   "僕のパパは、バイキンマンです。",
-//   "私は、脇を閉められません。",
-//   "アンパンマンの作り方。",
-// ];

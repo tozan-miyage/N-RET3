@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Storage;
 use App\Material;
 use App\Group;
 use Validator;
+// use Intervention\Image\ImageManager;
+// use \InterventionImage;
+use Intervention\Image\Facades\Image;
+
 
 
 class MaterialController extends Controller
@@ -62,17 +66,24 @@ class MaterialController extends Controller
                 //
                 $validated = $request->validate([
                     'image' => 'mimes:jpeg,png',
-                ]);//拡張子extension
-                $extension = $request->photo->extension();
-                $name = "group-image-".time().".".$extension;
+                ]);
                 
+                //拡張子を返すextension（）関数
+                $extension = $request->photo->extension();
+                //photoを保存する名前を決める
+                $name = "group-image-".time().".".$extension;
+                //リサイズする。
+                Image::make($request->photo)->resize(300, 200);
+                //画像を/public/storage/に保存
                 $request->photo->storeAs('/public', $name);
                 
+                //URLは$nameにする。
                 $url = Storage::url($name);
                 // $file = File::create([
                 //   'name' => $name,
                 //     'url' => $url,
                 // ]);
+                //photoカラムには$urlだけ保存
                 $material->photo =  $url;
             }
         }
@@ -89,9 +100,11 @@ class MaterialController extends Controller
         
         $material->save();
         
-        $group = Group::find($material -> group_id);
+        // $group = Group::find($material -> group_id);
+        $id = $material -> id;
         
-        return redirect()->route('material.show',$group);
+        // return redirect()->route('material.show',$group);
+        return redirect()->route('material.show_all',compact('id'));
     }
     
     public function group_store(Request $request)
@@ -103,6 +116,7 @@ class MaterialController extends Controller
         //保存します。
         $group->save();
         //Groups一覧へ戻る
+        
         return redirect()->route('material.index');
     }
 
@@ -121,13 +135,17 @@ class MaterialController extends Controller
         return view('materials.show',compact('materials','group'));
     }
 
-    public function show_all(Request $request,Material $material)
+    public function show_all($id)
     {
-        $group_id = $request->input('group_id');
-        $main_word = $request->input('main_word');
-        $materials = $material -> where('group_id',$group_id)->where('main_word',$main_word)->get();
+        // $group_id = $request->input('group_id');
+        $material = Material::find($id);
+        $group_id = $material->group_id;
+        // $main_word = $request->input('main_word');
+        $main_word = $material -> main_word;
         
-        return view('materials.show_all',compact('materials','main_word'));
+        $materials = Material::where('group_id',$group_id)->where('main_word',$main_word)->get();
+        
+        return view('materials.show_all',compact('materials','material'));
     }
     /**
      * Show the form for editing the specified resource.

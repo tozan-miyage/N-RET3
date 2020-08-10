@@ -25,6 +25,14 @@
                                         <input type="text" name="group_name" value="{{ $group -> group_name }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                                 </div>
                             </li>
+                            <li class="list-group-item">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">main_word</span>
+                                    </div>
+                                        <input type="text" name="main_word" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
+                                </div>
+                            </li>
                            <li class="list-group-item">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -33,14 +41,7 @@
                                         <input type="text" name="english" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                                 </div>
                             </li>
-                          <li class="list-group-item">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">main_word</span>
-                                    </div>
-                                        <input type="text" name="main_word" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
-                                </div>
-                            </li>
+                          
                             <li class="list-group-item">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">

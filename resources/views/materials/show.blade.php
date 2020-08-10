@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex">
-                    <div>{{ $group -> group_name }} Main_words</div>
+                    <div>Main_words By {{ $group -> group_name }} group</div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -23,8 +23,6 @@
                     <div class="m-2">
                         <form method="GET" action="{{ route('material_show_all',$material) }}">
                             @csrf
-                            <input type="hidden" name="main_word" value="{{ $material -> main_word }}"/>
-                            <input type="hidden" name="group_id" value="{{ $material -> group_id}}"/>
                             <button type="submit" class="btn btn-secondary">{{ $material -> main_word }}</button>
                         </form>
                     </div>

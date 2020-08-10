@@ -12,7 +12,7 @@
                         <!--{{ print_r($materials) }}-->
                         <ul>
                             @foreach($materials as $material)
-                            <li>
+                            <li id = "main_word">
                                 <form class="main_word_btn" method="POST" action="">
                                     @csrf
                                     <input type="hidden" name="material_id" value="{{ $material->id }}">
