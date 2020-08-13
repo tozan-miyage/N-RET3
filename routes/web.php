@@ -28,7 +28,7 @@ Route::resource('/material','MaterialController')->middleware('auth');
 // | GET|HEAD  | material/{material}      | material.show    | App\Http\Controllers\MaterialController@show                           | web          |
 // | DELETE    | material/{material}      | material.destroy | App\Http\Controllers\MaterialController@destroy                        | web          |
 // || GET|HEAD  | material/{material}/edit | material.edit    | App\Http\Controllers\MaterialController@edit                           | web          |
-Route::GET('/material/{material}/show','MaterialController@show_all')->name('material_show_all');
+Route::GET('/material/{material}/show','MaterialController@show_all')->name('material.show_all');
 
 // Groupモデル新規作成画面&作成
 Route::GET('/group/create','MaterialController@group_create')->name('group_create');

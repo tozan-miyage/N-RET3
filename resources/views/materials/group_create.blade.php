@@ -16,7 +16,7 @@
                     <form method="post" action="{{ route('group_store') }}">
                         @csrf
                         <input type="text" name="group_name" value=""/>
-                        <button type="submit">作成</button>
+                        <button type="submit" class="btn btn-primary m-2">作成</button>
                     </form>
                 </div>
 

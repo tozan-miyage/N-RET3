@@ -11,7 +11,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                <div class="d-flex">
+                <div class="d-flex flex-wrap">
                 @foreach($materials as $material)
                     <div class="card" style="width: 15rem;">
                         <img src="{{ $material -> photo }}" class="card-img-top" alt="...">
@@ -23,10 +23,10 @@
                                     @csrf
                                     <button type="submit" class="btn btn-warning m-1" />Edit</button>
                                 </form>
-                                <form action="{{ route('material.destroy',$material) }}" method="POST">
+                                <form action="{{ route('material.destroy',$material) }}" method="POST" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else { return false };">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger m-1" />Delete</button>
+                                    <button type="submit" class="btn btn-danger m-1"/>Delete</button>
                                 </form>
                             </div>
                         </div>
@@ -34,6 +34,11 @@
                 @endforeach
                 </div>
             </div>
+            <form action="{{ route('material.create') }}" method="GET">
+                @csrf
+                <input type="hidden" name = "id" value = "{{ $material -> group_id }}">
+                <button type="submit" class="btn btn-primary m-2">New Create</button>
+            </form>  
             <a href="/material/{{ $material->group_id }}"　class="m-3">Main_words一覧に戻る</a>
             <a href="/material" class="m-3">Group一覧に戻る</a>
             

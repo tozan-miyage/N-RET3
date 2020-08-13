@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
+// include composer autoload
+// require 'vendor/autoload.php';
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Material;
 use App\Group;
 use Validator;
-// use Intervention\Image\ImageManager;
+use Intervention\Image\ImageManager;
 // use \InterventionImage;
 use Intervention\Image\Facades\Image;
 
@@ -58,6 +59,10 @@ class MaterialController extends Controller
      */
     public function store(Request $request,Material $material)
     {
+        
+        // configure with favored image driver (gd by default)
+        Image::configure(array('driver' => 'imagick'));
+
         $material = new Material();
         
         if ($request->hasFile('photo')) {
@@ -104,7 +109,7 @@ class MaterialController extends Controller
         $id = $material -> id;
         
         // return redirect()->route('material.show',$group);
-        return redirect()->route('material.show_all',compact('id'));
+        return redirect()->route('material.show_all',$material);
     }
     
     public function group_store(Request $request)
@@ -139,6 +144,7 @@ class MaterialController extends Controller
     {
         // $group_id = $request->input('group_id');
         $material = Material::find($id);
+        
         $group_id = $material->group_id;
         // $main_word = $request->input('main_word');
         $main_word = $material -> main_word;
@@ -173,6 +179,9 @@ class MaterialController extends Controller
      */
     public function update(Request $request, Material $material)
     {
+        
+        Image::configure(array('driver' => 'imagick'));
+        
         if ($request->hasFile('photo')) {
             //  Let's do everything here
             if ($request->file('photo')->isValid()) {
@@ -181,7 +190,10 @@ class MaterialController extends Controller
                     'image' => 'mimes:jpeg,png',
                 ]);//拡張子extension
                 $extension = $request->photo->extension();
+                
                 $name = "group-image-".time().".".$extension;
+                
+                Image::make($request->photo)->resize(300, 200);
                 
                 $request->photo->storeAs('/public', $name);
                 
@@ -208,12 +220,12 @@ class MaterialController extends Controller
         
         $material->update();
         
-        $main_word = $material->main_word;
+        // $main_word = $material->main_word;
         
-        $materials = Material::where('main_word',$main_word)->get();
+        // $materials = Material::where('main_word',$main_word)->get();
         
         // return redirect()->route('material_show_all',['id'=>$material->id]);
-        return view('materials.show_all',compact('materials','main_word'));
+        return redirect() -> route('material.show_all',$material);
     }
 
     public function group_update(Request $request, Group $group)
@@ -232,13 +244,16 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Material $material)
+    public function destroy($id)
     {
-        $main_word = $material->main_word;
-        $material->delete();
-        $materials = $material -> where('main_word',$main_word)->get();
+        $material = Material::find($id);
         
-        return view('materials.show_all',compact('materials','main_word'));
+        // $main_word = $material->main_word;
+        // $materials = Material::where('main_word',$main_word)->get();
+        $group_id = $material->group_id;
+        $material->delete();
+        
+        return redirect()->route('material.show',$group_id);
         // return redirect()->route('material.index');
     }
     

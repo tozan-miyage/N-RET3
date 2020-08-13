@@ -70,6 +70,7 @@
                     
                 </div>
             </div>
+            <a href="/material/{{ $group -> id }}"　class="m-3">Main_words一覧に戻る</a>
         </div>
     </div>
 </div>

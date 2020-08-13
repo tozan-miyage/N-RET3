@@ -6,14 +6,14 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex">
-                    <div>Main_words By {{ $group -> group_name }} group</div>
+                    <div><h2>{{ $group -> group_name }}</h2></div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
                 </div>    
-                <div class="card-body d-flex">
+                <div class="card-body d-flex flex-wrap">
                     <form action="{{ route('material.create') }}" method="GET">
                         @csrf
                         <input type="hidden" name = "id" value = "{{ $group -> id }}">
@@ -21,7 +21,7 @@
                     </form>  
                     @foreach($materials as $material)
                     <div class="m-2">
-                        <form method="GET" action="{{ route('material_show_all',$material) }}">
+                        <form method="GET" action="{{ route('material.show_all',$material) }}">
                             @csrf
                             <button type="submit" class="btn btn-secondary">{{ $material -> main_word }}</button>
                         </form>
