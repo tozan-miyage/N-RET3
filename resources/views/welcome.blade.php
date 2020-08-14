@@ -15,7 +15,7 @@
   <!-- ヘッダー要素 -->
   <header>
     <img src="./img/logo.png" alt="イメージキャラクター" />
-    <div><a href="/login">ログイン</a></div>
+    <!--<div><a href="/login">ログイン</a></div>-->
   </header>
 
   <!-- トップ表示 -->
