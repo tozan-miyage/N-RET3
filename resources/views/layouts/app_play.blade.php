@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <!--<link rel="stylesheet" href="../css/main.css"/>-->
-    <link rel="stylesheet" href="{{ asset('css/typing.css') }}"/>
+    <link rel="stylesheet" href="{{ mix('css/typing.css') }}"/>
     <title>N-RET TYPING</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
     @yield('js')
-    <script src={{ asset("js/typing.js") }}></script>
+    <script src={{ mi("js/typing.js") }}></script>
     
 </body>
 </html>
