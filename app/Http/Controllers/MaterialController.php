@@ -78,7 +78,7 @@ class MaterialController extends Controller
                 //photoを保存する名前を決める
                 $name = "group-image-".time().".".$extension;
                 //リサイズする。
-                Image::make($request->photo)->resize(300, 200);
+                Image::make($request->photo)->resize(300, 200)->crop(300,200);
                 //画像を/public/storage/に保存
                 $request->photo->storeAs('/public', $name);
                 
