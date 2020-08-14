@@ -36,7 +36,7 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
     @yield('js')
-    <script src={{ mi("js/typing.js") }}></script>
+    <script src="{{ mix('js/typing.js') }}"></script>
     
 </body>
 </html>
