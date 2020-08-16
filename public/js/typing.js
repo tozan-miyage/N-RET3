@@ -10,7 +10,7 @@
 $(document).ready(function() {
 
   var options = {
-    valueNames: ['main_word_btn']
+    valueNames: ['main_word_submit']
   };
 
   var mainWordsList = new List('main_words', options);
@@ -34,24 +34,7 @@ $(document).ready(function() {
     let dataobject = $(this).serialize();
 
     //URI(/api/materialapi）に接続・dataobjectを渡す      
-    $.post('/api/materialapi', dataobject).done(function(data) {　
-
-      // $("#en_text").text(data[0].english);
-      　　　 // let array = [
-      　　　 //   {key1: 1, key2: 2, key3: 3},
-      　　　 //   {key1: 1, key2: 2, key3: 3}
-      // ]
-      //うまくいかない↓
-      // data.forEach(elm => {
-      //   Object.keys(elm).forEach(key => {
-      //     en_text_subject = elm[key]['english'];
-      //     ja_text_subject = elm[key]['japanese'];
-      //     img_subject = elm[key]['photo'];
-      // console.log(en_text_subject);
-      // console.log(ja_text_subject);
-      // console.log(img_subject);
-      //   });
-      // });
+    $.post('/api/materialapi', dataobject).done(function(data) {
 
       //data(オブジェクトで取得)を回す
       data.forEach(object => {
@@ -95,7 +78,8 @@ $(document).ready(function() {
       const navi = document.getElementById("navi");
       const alerts = document.getElementById("alerts");
       const change = document.getElementById("change");
-      const main_word = document.getElementById("main_word")
+      const main_word = document.getElementById("main_word");
+      const main_word_submit = document.getElementsByClassName("main_word_submit");
 
       // 素材の表示
       let num = 0;
@@ -197,13 +181,20 @@ $(document).ready(function() {
         change.textContent = en_text_subject[num].slice(0, loc);
         target.textContent = inspace.slice(loc);
       }
+      
+      const mainWordBtnBlur = () => {
+        main_word_submit.blur();
+      }
+      
 
       window.addEventListener("keydown", (e) => {
         let key = e.key;
         let targetKey = en_text_subject[num][loc];
 
-
+        mainWordBtnBlur();
+        
         logo_yellow();
+        
         navi_message("まねしてタイプ！");
         if (loc === 1) {
           audio();
