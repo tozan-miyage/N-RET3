@@ -7,8 +7,13 @@
 //   }
 // };
 // checkBrowser();
-
 $(document).ready(function() {
+
+  var options = {
+    valueNames: ['main_word_btn']
+  };
+
+  var mainWordsList = new List('main_words', options);
 
   // データを格納する変数を宣言 constにするとエラーが起きる。なぜ？
   let en_text_subject = [];
@@ -21,16 +26,16 @@ $(document).ready(function() {
     en_text_subject = [];
     ja_text_subject = [];
     img_subject = [];
-    
+
     //元々のイベントは、発火しないようにする。
     e.preventDefault();　　
-    
+
     //dataobjectに、formの内容を格納（データを文字列に変換）serealize()
     let dataobject = $(this).serialize();
-    
+
     //URI(/api/materialapi）に接続・dataobjectを渡す      
     $.post('/api/materialapi', dataobject).done(function(data) {　
-      
+
       // $("#en_text").text(data[0].english);
       　　　 // let array = [
       　　　 //   {key1: 1, key2: 2, key3: 3},
@@ -69,7 +74,7 @@ $(document).ready(function() {
           }
         });
       });
-      
+
       //これでも、うまくいく↓
       // for (let i = 0; i < data.length; i++) {
 
@@ -94,7 +99,7 @@ $(document).ready(function() {
 
       // 素材の表示
       let num = 0;
-      
+
       const set_img = (num) => {
         img_text.src = img_subject[num];
       };

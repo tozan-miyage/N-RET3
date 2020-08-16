@@ -10,7 +10,7 @@
                         </div>
                         <ul class="level_choices">
                             @foreach($groups as $group)
-                            
+                            <li class="how_to">
                             <!--うまくいった！-->
                             <form action="{{ route('group.show',$group) }}" method="get">
                                 
@@ -18,10 +18,11 @@
                             <!--getメソッドで、id=group_idをリクエスト-->
                             <!--<form action="/materials/" method="get">-->
                             <!--<input type="hidden" name="id" value="{{ $group -> id }}">-->
-                            <li class="how_to">
+                            
                                 <button type="submit" class="level_choice_5">{{ $group -> group_name }}</button>
-                            </li>
+                            
                             </form>
+                            </li>
                             @endforeach
                             
                         </ul>

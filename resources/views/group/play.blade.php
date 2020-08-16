@@ -3,14 +3,17 @@
         @section('content')
             <div class="row main_space">
                 <!-- 左サイドメニュー -->
-                <div class="col-2 menu">
+                <div id="main_words" class="col-2 menu">
                     <p>Menu</p>
-                    <div class="search">
-                        <input type="text" placeholder="単語で検索" />
-                    </div>
+                    <!--<form class="search_input" method="P">-->
+                        <div class="search">
+                            <input class="search" placeholder="単語を検索" />
+                        </div>
+                    <!--</form>-->
+                    
                     <div class="ul_scroll">
                         <!--{{ print_r($materials) }}-->
-                        <ul>
+                        <ul class="list">
                             @foreach($materials as $material)
                             <li id = "main_word">
                                 <form class="main_word_btn" method="POST" action="">
