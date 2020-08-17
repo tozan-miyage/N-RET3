@@ -29,7 +29,7 @@ footer {
 
 .nav_belt .col-12 img {
     height: 40px;
-    margin-left: 40px;
+    margin-left: -20px;
 }
 
 
@@ -258,13 +258,14 @@ footer .footer_area .col-12 a:hover {
 
 #navi_area {
     display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
+    justify-content: center;
+    /*margin-top: 50px;*/
+    text-align:center;
 }
 
 #navi_area div {
-    width: 300px;
-    margin-top: 10px;
+    /*width: 300px;*/
+    /*margin-top: 10px;*/
 }
 
 #alerts {

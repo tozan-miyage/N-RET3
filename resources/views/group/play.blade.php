@@ -20,6 +20,7 @@
                                     @csrf
                                     <input type="hidden" name="material_id" value="{{ $material->id }}">
                                     <button class="main_word_submit" type="submit">{{ $material -> main_word }}</button>
+                                    <!--<input class="main_word_submit" type="submit" value="{{ $material -> main_word }}">-->
                                 </form>
                             </li>
                             @endforeach
@@ -49,10 +50,11 @@
                         <div id="navi_area">
                             <div class="how_to_navi">
                                 <img id="logo_img" src="../img/logo1.jpg" alt="" />
-                                <p id="navi">はじめよう！</p>
-                            </div>
-                            <div id="alerts" class="alert alert-warning" role="alert">
-                                タイピングでスタート
+                                <!--<p id="navi">はじめよう！</p>-->
+                            <!--</div>-->
+                            <span id="alerts" class="alert alert-warning">つかえない英語タイピング</span>
+                            <!--<div id="alerts" class="alert alert-warning" role="alert">-->
+                            <!--    タイピングでスタート-->
                             </div>
                         </div>
                     </div>

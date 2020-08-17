@@ -80,7 +80,10 @@ $(document).ready(function() {
       const change = document.getElementById("change");
       const main_word = document.getElementById("main_word");
       const main_word_submit = document.getElementsByClassName("main_word_submit");
-
+      
+      // const input_blur = () => {
+      //   main_word_submit.blur();
+      // }
       // 素材の表示
       let num = 0;
 
@@ -121,43 +124,23 @@ $(document).ready(function() {
 
       // speakBtn.addEventListener("click", function () {
       // アラート表示を変える
-      const alerts_ok = () => {
-        alerts.className = "alert alert-primary";
-        alerts.textContent = "OK!";
-      };
-
-      const alerts_miss = () => {
-        alerts.className = "alert alert-danger";
-        alerts.textContent = "MISS!";
-      };
-
-      const alerts_start = () => {
-        alerts.className = "alert alert-warning";
-        alerts.textContent = "クリックしてスタート！";
-      };
-
-      const alerts_next = () => {
-        alerts.className = "alert alert-info _click";
-        alerts.textContent = "次の問題へ (エンターキー）";
-      };
-
-      // ロゴイメージを変える
-      const logo_red = () => {
-        logo_img.src = "../img/logo1.jpg";
-      };
-
-      const logo_yellow = () => {
-        logo_img.src = "../img/logo2.jpg";　　　
-      };
-
-      const logo_blue = () => {
-        logo_img.src = "../img/logo3.jpg";　　
-      };
-
-      // ナビメッセージを変える
-      const navi_message = (message) => {
-        navi.textContent = message;
-      };
+      
+      const alertNavi = (logo,alertClassName,text) => {
+        logo_img.src = logo;
+        alerts.className = alertClassName;
+        alerts.textContent = text;
+      }
+      
+      // ロゴ変数
+      const red = "../img/logo1.jpg";
+      const yellow = "../img/logo2.jpg";　　　
+      const blue = "../img/logo3.jpg";
+      
+      //alert変数
+      const primary = "alert alert-primary";
+      const danger = "alert alert-danger";
+      const warning = "alert alert-warning";
+      const info = "alert alert-info";
 
       // ロジック
 
@@ -173,29 +156,25 @@ $(document).ready(function() {
       let loc = 0;
 
       function updateTarget() {
-        // let placeholder = "";
-        // for (let i = 0; i < loc; i++) {
-        //   placeholder += "_";
-        //   console.log(i);
-        // }
+        
         change.textContent = en_text_subject[num].slice(0, loc);
         target.textContent = inspace.slice(loc);
       }
       
-      const mainWordBtnBlur = () => {
-        main_word_submit.blur();
-      }
+      // const mainWordBtnBlur = () => {
+      //   main_word_submit.blur();
+      // }
       
-
+      alertNavi(red,warning,"タイピングでスタート！");
+      
       window.addEventListener("keydown", (e) => {
         let key = e.key;
         let targetKey = en_text_subject[num][loc];
 
-        mainWordBtnBlur();
+        // mainWordBtnBlur();
+        // main_word_submit.blur();
+        // window.blur();
         
-        logo_yellow();
-        
-        navi_message("まねしてタイプ！");
         if (loc === 1) {
           audio();
         }
@@ -203,37 +182,40 @@ $(document).ready(function() {
         if (key !== "Enter") {
 
           if (key === targetKey || key === targetKey.toLowerCase()) {
-            alerts_ok();
+            alertNavi(yellow,primary,"OK!");
             loc++;
             updateTarget();
+            
             if (loc === en_text_subject[num].length) {
               change.textContent = ja_text_subject[num];
               audio();
-              logo_blue();
-              navi_message("よくできました！");
-              alerts_next();
+              alertNavi(blue,info,"次の問題へ（エンターキー）");
             }
           }
           else {
-            alerts_miss();
-            navi_message("よく見て！");
+            alertNavi(yellow,warning,"miss!");
           }
         }
+        
         else if (num < img_subject.length) {
           change.textContent = "";
           num++;
+          alertNavi(red,warning,"タイピングでスタート！");
+          
           if (num === img_subject.length) {
             change.textContent = "";
+            // en_text.textContent = "Choose a word from the left menu";
+            // img_text.src ="../img/vishwanath-surpur-MaXtz1BRD08-unsplash.jpg";
             num = 0;
             game_set(num);
             loc = 0;
-            logo_red();
-            navi_message("はじめよう");
+            alertNavi(red,info,"続きは？");
+            
           }
+          
           game_set(num);
           loc = 0;
-          alerts_next();
-          navi_message("Let's tyaping");
+          
         }
       });　
     });
