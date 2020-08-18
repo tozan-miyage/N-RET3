@@ -1,6 +1,7 @@
 @extends('layouts.app_play')
         <!-- メイン画面（中央部分） -->
         @section('content')
+    
             <div class="row main_space">
                 <!-- 左サイドメニュー -->
                 <div id="main_words" class="col-2 menu">

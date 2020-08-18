@@ -227,14 +227,15 @@ footer .footer_area .col-12 a:hover {
     margin-bottom: 30px;
     width: 50%;
     height: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
+    object-fit:cover;
 }
 
 .theme_img img {
     width: 100%;
     display: block;
     /* margin-bottom: 10px; */
-    /* object-fit: cover; */
+    object-fit: cover; 
     
 }
 
