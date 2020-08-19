@@ -107,7 +107,7 @@ $(document).ready(function() {
       };
 
       let inspace;
-      const set_en_type = (num) => {
+        const set_en_type = (num) => {
         const replaces = en_text_subject[num];
         const replaceValue = / /gi;
         inspace = replaces.replace(replaceValue, "_");
@@ -191,7 +191,7 @@ $(document).ready(function() {
         if (loc === 1) {
           audio();
         }
-
+        // Enter以外のkey
         if (key !== "Enter") {
 
           if (key === targetKey || key === targetKey.toLowerCase()) {
@@ -217,14 +217,14 @@ $(document).ready(function() {
 
           if (num === img_subject.length) {
             
-            change.textContent = ""
-            num = 0;
-            game_set(num);
-            loc = 0;
-            // en_text_subject.push("Choose a word from the left menu");
-            // ja_text_subject.push("左Menuから単語を選ぼう");
-            // img_subject.push("../img/vishwanath-surpur-MaXtz1BRD08-unsplash.jpg");
-            // alertNavi(blue, primary, "よくできました！");
+            // change.textContent = ""
+            // num = 0;
+            // game_set(num);
+            // loc = 0;
+            en_text_subject.push("Choose a word from the left menu");
+            ja_text_subject.push("左Menuから単語を選ぼう");
+            img_subject.push("../img/good_job2.jpg");
+            alertNavi(blue, primary, "よくできました！");
             
           }
 

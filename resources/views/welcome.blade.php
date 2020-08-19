@@ -7,167 +7,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>N-RET</title>
   <link rel="stylesheet" href={{ asset("css/reset.css")}} />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href={{ asset("css/landingPage.css")}} />
   
 </head>
 
 <body>
-  <!-- ヘッダー要素 -->
-  <header>
-    <img src="./img/logo.png" alt="イメージキャラクター" />
-    <!--<div><a href="/login">ログイン</a></div>-->
-  </header>
-
-  <!-- トップ表示 -->
-  <main>
-    <div class="container">
-      <div class="main_title">
-        <h1>N-RET</h1>
-        <p>ありえない英語タイピング</p>
-        <a href="/group"><button class="play">今すぐプレイ</button></a>
+  <div class="container-xl">
+    
+    <header>
+    <div class="row">
+      <div class="col">
+        <div class="site_logo"><img height="60px" src="./img/logo.png" alt="イメージキャラクター" /></div>
       </div>
     </div>
-
+    </header>
+    
+    <main>
+    <div class="row">
+      <div class="col top_screen">
+        <div class="top_img">
+          <img src="../img/ryan-wallace-azA1hLbjBBo-unsplash.jpg"></img>
+          <div class="site_title_and_link_button">
+            <h1 class="site_title_english">N-RET</h1>
+            <p class="site_title">つかえない英語タイピング</p>
+            <a href="/group"><button class="link_button">今すぐプレイ</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <!-- N-RETとは -->
-    <div class="container-herf">
-      <div class="explanation">
-        <p class="fadein">Not Reality English Typing</p>
-        <h2 class="fadein">N-RETとは</h2>
-        <p class="fadein">
-          タイピングを通して、英語に慣れ親しむ学習サイトです。
+    <div class="row">
+      <div class="col">
+        <div class="explanation">
+          <p class="basis_font fadein">Not Reality English Typing</p>
+        <h2 class="caption fadein">N-RETとは</h2>
+        <p class="basis_font fadein">
+          タイピングを通して、英語に慣れ親しむ学習サイトです。</p>
+          <p class="basis_font fadein">ただ、取り扱う英文が、リアリティに欠けます。</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <div class="illustration">
+          <img class="illustration_img fadein" src="./img/austin-pacheco-FtL07GM9Q7Y-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">Walnuts are delicious to eat with their shells.</p>
+        </div>
+      </div>
+    </div>
+    <!--見る-->
+    <div class="row">
+      <div class="col">
+        <div class="explanation">
+        <h2 class="caption fadein">見る</h2>
+        <p class="basis_font fadein">何の変哲もない写真から、明らかにおかしい写真まで、あらゆるものを用意しました。</p>
+        <p class="basis_font fadein">英文で内容を説明しますが、日常ではあまりつかえないことにご注意。</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <div class="illustration">
+          <img class="illustration_img fadein" src="./img/steven-libralon-Do1GQljlNk8-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">My dad is Baikinman.</p>
+        </div>
+      </div>
+    </div>
+    <!--聞く-->
+    <div class="row">
+      <div class="col">
+        <div class="explanation">
+        <h2 class="caption fadein"><span class="pink">聞</span>く</h2>
+        <p class="basis_font fadein">ネイティブな発音に親しみましょう。</p>
+        <p class="basis_font fadein">写真と文だけでなく、音声も流れます。</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <div class="illustration">
+          <img class="illustration_img fadein" src="./img/ben-white-lVCHfXn3VME-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">I can't close my Armpit.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!--話す-->
+    <div class="row">
+      <div class="col">
+        <div class="explanation">
+        <h2 class="caption fadein"><span class="yellow">話</span>す</h2>
+        <p class="basis_font fadein">聞こえた英語をマネして、話してみましょう。</p>
+        <p class="basis_font fadein">タイピングをしながら、発音の練習にもなります。</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <div class="illustration">
+          <img class="illustration_img fadein" src="./img/jason-rosewell--iAgKHaNUqI-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">How to make Anpanman.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!--書く-->
+    <div class="row">
+      <div class="col">
+        <div class="explanation">
+        <h2 class="caption fadein"><span class="blue">書</span>く</h2>
+        <p class="basis_font fadein">タイピングを繰り返します。</p>
+        <p class="basis_font fadein">アウトプットを多くし、慣れることが上達への近道です。</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <div class="illustration">
+          <img class="illustration_img fadein" src="./img/hannah-tasker-ZBkH8G4_yyE-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">I can break an egg in the blink of an eye.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!--楽しむ-->
+    <div class="row">
+      <div class="col">
+        <div class="explanation">
+        <h2 class="caption fadein"><span class="pink">楽</span><span class="yellow">し</span><span class="blue">む</span></h2>
+        <p class="basis_font fadein">
+          つかえない英文ばかりです。ここは、わりきりましょう。
         </p>
-        <p class="fadein">ただ、取り扱う英文が、リアリティに欠けます。</p>
+        </div>
       </div>
     </div>
-
-    <div class="container-herf-white">
-      <div class="illustration">
-        <img src="./img/austin-pacheco-FtL07GM9Q7Y-unsplash.jpg" alt="画像" class="fadein" />
-        <p class="fadein">Walnuts are delicious to eat with their shells.</p>
+    
+    <div class="row d-flex">
+      <div class="col-sm-6 col-12 illustration">
+        <div class="summary_illustration_img">
+          <img class="fadein" src="./img/steven-libralon-Do1GQljlNk8-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">My dad is Baikinman.</p>
+          <p class="basis_font fadein">僕のパパは、バイキンマンです。</p>
+        </div>
+      </div>
+      
+      <div class="col-sm-6 col-12 illustration">
+        <div class="summary_illustration_img">
+          <img class="fadein" src="./img/austin-pacheco-FtL07GM9Q7Y-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">Walnuts are delicious to eat with their shells.</p>
+          <p class="basis_font fadein">くるみは、殻ごと食べるのが美味しい。</p>
+        </div>
+      </div>
+      
+      <div class="col-sm-6 col-12 illustration">
+        <div class="summary_illustration_img">
+          <img class="fadein" src="./img/ben-white-lVCHfXn3VME-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">I can't close my armpit.</p>
+          <p class="basis_font fadein">私は、脇を閉められません。</p>
+        </div>
+      </div>
+      
+      <div class="col-sm-6 col-12 illustration">
+        <div class="summary_illustration_img">
+          <img class="fadein" src="./img/jason-rosewell--iAgKHaNUqI-unsplash.jpg" alt="画像" class="fadein" />
+          <p class="basis_font fadein">How to make Anpanman.</p>
+          <p class="basis_font fadein">アンパンマンの作り方。</p>
+        </div>
       </div>
     </div>
-
-    <!-- 見る -->
-    <div class="container-herf">
-      <div class="explanation">
-        <h2 class="fadein">見る</h2>
-        <p class="fadein">
-          何の変哲もない写真から、明らかにおかしい写真まで、あらゆるものを用意しました。
-        </p>
-        <p class="fadein">
-          英文で内容を説明していますが、現実ではありえないことにご注意。
-        </p>
+    
+    <div class="row">
+      <div class="col top_screen">
+        <div class="top_img">
+          <img src="../img/ryan-wallace-azA1hLbjBBo-unsplash.jpg"></img>
+          <div class="site_title_and_link_button">
+            <h1 class="site_title_english">N-RET</h1>
+            <p class="site_title">つかえない英語タイピング</p>
+            <a href="/group"><button class="link_button">今すぐプレイ</button></a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="container-herf-white">
-      <div class="illustration">
-        <img src="./img/steven-libralon-Do1GQljlNk8-unsplash.jpg" alt="" class="fadein" />
-        <p class="fadein">My dad is Baikinman.</p>
+    </main>
+    
+    <footer>
+      <div class="row">
+        <div class="col">
+          <ul class="footer_ul">
+            <li class="fotter_list">Copyright ©️ 2020 N-RET Secretariat All rights reserved</li>
+            <li class="fotter_list"><a class="js-modal-open" href="" data-target="modal01">利用規約</a></li>
+            <li class="fotter_list"><a class="js-modal-open" href="" data-target="modal02">プライバシーポリシー</a></li>
+            <li class="fotter_list"><a class="js-modal-open" href="#">問い合わせ</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-    <!-- 聞く -->
-    <div class="container-herf">
-      <div class="explanation">
-        <h2 class="fadein"><span class="pink">聞</span>く</h2>
-        <p class="fadein">写真と文だけでなく、音声も流れます。</p>
-        <p class="fadein">ネイティブな発音に親しみましょう。</p>
-      </div>
-    </div>
-    <div class="container-herf-white">
-      <div class="illustration">
-        <img src="./img/ben-white-lVCHfXn3VME-unsplash.jpg" alt="" />
-        <p class="fadein">I can't close my Armpit.</p>
-      </div>
-    </div>
-
-    <!-- 話す -->
-    <div class="container-herf">
-      <div class="explanation">
-        <h2 class="fadein"><span class="yellow">話</span>す</h2>
-        <p class="fadein">聞こえた英語をマネして、話してみましょう。</p>
-        <p class="fadein">タイピングをしながら、発音の練習にもなります。</p>
-      </div>
-    </div>
-    <div class="container-herf-white">
-      <div class="illustration">
-        <img src="./img/jason-rosewell--iAgKHaNUqI-unsplash.jpg" alt="" class="fadein" />
-        <p class="fadein">How to make Anpanman.</p>
-      </div>
-    </div>
-
-    <!-- 書く -->
-    <div class="container-herf">
-      <div class="explanation">
-        <h2 class="fadein"><span class="blue">書</span>く</h2>
-        <p class="fadein">タイピングを繰り返します。</p>
-        <p class="fadein">
-          アウトプットを多くし、慣れることが上達への近道です。
-        </p>
-      </div>
-    </div>
-    <div class="container-herf-white">
-      <div class="illustration">
-        <img src="./img/hannah-tasker-ZBkH8G4_yyE-unsplash.jpg" alt="" class="fadein" />
-        <p class="fadein">I can break an egg in the blink of an eye.</p>
-      </div>
-    </div>
-
-    <!-- まとめ -->
-    <div class="container-duble">
-      <div class="illustration grouping">
-        <img src="./img/austin-pacheco-FtL07GM9Q7Y-unsplash.jpg" alt="画像" />
-        <p>Walnuts are delicious to eat with their shells.</p>
-        <p>くるみは、殻ごと食べるのが美味しい。</p>
-      </div>
-
-      <div class="illustration grouping">
-        <img src="./img/steven-libralon-Do1GQljlNk8-unsplash.jpg" alt="" />
-        <p>My dad is Baikinman.</p>
-        <p>僕のパパは、バイキンマンです。</p>
-      </div>
-
-      <div class="illustration grouping">
-        <img src="./img/ben-white-lVCHfXn3VME-unsplash.jpg" alt="" />
-        <p>I can't close my armpit.</p>
-        <p>私は、脇を閉められません。</p>
-      </div>
-
-      <div class="illustration grouping">
-        <img src="./img/jason-rosewell--iAgKHaNUqI-unsplash.jpg" alt="" />
-        <p>How to make Anpanman.</p>
-        <p>アンパンマンの作り方。</p>
-      </div>
-
-      <div class="center-letter">
-        <p>
-          <span class="pink">楽</span><span class="yellow">し</span><span class="blue">む</span>
-        </p>
-        <p>現実ではありえない英文なので、クスッと笑えます。</p>
-      </div>
-    </div>
-    <div class="container-duble">
-      <div class="sample_image"><img src="./img/スクリーンショット 2020-06-01 11.30.49.png" alt="">
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="main_title">
-        <h1>さあ、はじめよう</h1>
-        <!-- <p>ありえない英語タイピング</p> -->
-        <button class="play" onclick="location.href='./main_pages/grade_choice.html'">さっそく、プレイ</button>
-      </div>
-      <p class="overview">
-        Copyright ©️ 2020 N-RET Secretariat All rights reserved. &ensp;
-        <a class="js-modal-open" href="" data-target="modal01">利用規約</a>
-        &ensp;
-        <a class="js-modal-open" href="" data-target="modal02">プライバシーポリシー</a>
-        &ensp; <a href="#">問い合わせ</a>
-      </p>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <!-- モーダルウィンドウで表示 -->
   <div id="modal01" class="modal js-modal">

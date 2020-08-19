@@ -44,18 +44,14 @@
 
                         <!-- タイピング -->
                         <div>
-                            <span id="change"></span>
-                            <p id="target">左Menuから単語を選ぼう</p>
+                            <span id="change"></span><p id="target">左Menuから単語を選ぼう</p>
                         </div>
 
                         <div id="navi_area">
                             <div class="how_to_navi">
                                 <img id="logo_img" src="../img/logo1.jpg" alt="" />
-                                <!--<p id="navi">はじめよう！</p>-->
-                            <!--</div>-->
                             <span id="alerts" class="alert alert-warning">つかえない英語タイピング</span>
-                            <!--<div id="alerts" class="alert alert-warning" role="alert">-->
-                            <!--    タイピングでスタート-->
+                            
                             </div>
                         </div>
                     </div>
