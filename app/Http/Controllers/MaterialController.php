@@ -84,10 +84,7 @@ class MaterialController extends Controller
                 
                 //URLは$nameにする。
                 $url = Storage::url($name);
-                // $file = File::create([
-                //   'name' => $name,
-                //     'url' => $url,
-                // ]);
+                
                 //photoカラムには$urlだけ保存
                 $material->photo =  $url;
             }
