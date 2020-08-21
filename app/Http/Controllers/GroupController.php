@@ -50,6 +50,7 @@ class GroupController extends Controller
     {
         // $materials = $group->materials()->groupBy('main_word')->get();
         $materials = $group->materials()->get();
+        $materials = $materials->unique('main_word');
         return view('group.play',compact('materials'));
     }
 
