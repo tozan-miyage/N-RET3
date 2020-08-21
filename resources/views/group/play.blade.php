@@ -34,7 +34,7 @@
                     <div class="how_to_contents">
                         <!-- 課題の写真 -->
                         <div class="theme_img">
-                            <img id="img_text" src="../img/vishwanath-surpur-MaXtz1BRD08-unsplash.jpg" alt="イメージ画像が入ります" />
+                            <img id="img_text" src="/img/vishwanath-surpur-MaXtz1BRD08-unsplash.jpg" alt="イメージ画像が入ります" />
                         </div>
 
                         <!-- 写真を説明する英文 -->
