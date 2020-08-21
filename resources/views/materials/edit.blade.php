@@ -12,7 +12,7 @@
                         </div>
                     @endif
                 <div class="card-body">
-                    <form action="{{ route('material.update',$material) }}" method="POST">
+                    <form action="{{ route('material.update',$material) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card">
