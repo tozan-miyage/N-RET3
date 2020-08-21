@@ -48,7 +48,9 @@ class GroupController extends Controller
      */
     public function show(Request $request,Group $group)
     {
-        $materials = $group->materials()->groupBy('main_word')->get();
+        // $materials = $group->materials()->groupBy('main_word')->get();
+        $materials = $group->materials()->get();
+        $materials = $materials->unique('main_word');
         return view('group.play',compact('materials'));
     }
 
