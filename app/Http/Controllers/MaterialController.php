@@ -132,6 +132,8 @@ class MaterialController extends Controller
     {   
         
         $materials = Material::where('group_id',$id)->get();
+        $materials = $materials->unique('main_word');
+
         $group = Group::find($id);
         // $materials = $group->materials()->groupBy('main_word')->get();
         return view('materials.show',compact('materials','group'));

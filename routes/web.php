@@ -27,7 +27,7 @@ Route::resource('/material','MaterialController')->middleware('auth');
 // | PUT|PATCH | material/{material}      | material.update  | App\Http\Controllers\MaterialController@update                         | web          |
 // | GET|HEAD  | material/{material}      | material.show    | App\Http\Controllers\MaterialController@show                           | web          |
 // | DELETE    | material/{material}      | material.destroy | App\Http\Controllers\MaterialController@destroy                        | web          |
-// || GET|HEAD  | material/{material}/edit | material.edit    | App\Http\Controllers\MaterialController@edit                           | web          |
+// | GET|HEAD  | material/{material}/edit | material.edit    | App\Http\Controllers\MaterialController@edit                           | web          |
 Route::GET('/material/{material}/show','MaterialController@show_all')->name('material.show_all');
 
 // Groupモデル新規作成画面&作成
