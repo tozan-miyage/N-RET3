@@ -102,4 +102,13 @@ class GroupController extends Controller
         //500エラー
         // return response()->json($request->inputs());
     }
+    
+    //phpのinfomation get
+        public function php_info(Request $request)
+    {
+        
+        return view('group.php_info');
+     
+    }
+    
 }

@@ -44,3 +44,5 @@ Route::DELETE('/group/{group}','MaterialController@group_destroy')->name('group_
 // Play画面
 Route::GET('/group/{group}','GroupController@show')->name('group.show');
 Route::GET('/group','GroupController@index')->name('group.index');
+
+Route::GET('/php_info','GroupController@php_info')->name('group.php_info');
