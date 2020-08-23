@@ -177,7 +177,7 @@ $(document).ready(function() {
       // }
 
       alertNavi(red, warning, "タイピングでスタート！");
-
+      
       window.addEventListener("keydown", (e) => {
         // mainWordBtnBlur();
         
@@ -189,7 +189,9 @@ $(document).ready(function() {
         // window.blur();
 
         if (loc === 1) {
+          speechSynthesis.cancel();//音声のキューをクリア
           audio();
+          
         }
         // Enter以外のkey
         if (key !== "Enter") {
@@ -201,6 +203,7 @@ $(document).ready(function() {
 
             if (loc === en_text_subject[num].length) {
               change.textContent = ja_text_subject[num];
+              speechSynthesis.cancel();//音声のキューをクリア
               audio();
               alertNavi(blue, info, "次の問題へ（エンターキー）");
             }
