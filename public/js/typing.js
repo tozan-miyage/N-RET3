@@ -13,9 +13,8 @@ $(document).ready(function() {
     valueNames: ['main_word_submit']
   };
 
-  var mainWordsList = new List('main_words', options);
+  let mainWordsList = new List('main_words', options);
 
-  // データを格納する変数を宣言 constにするとエラーが起きる。なぜ？
   let en_text_subject = [];
   let ja_text_subject = [];
   let img_subject = [];
@@ -24,7 +23,7 @@ $(document).ready(function() {
   $("form.main_word_btn").submit(function(e) {
     //元々のイベントは、発火しないようにする。
     e.preventDefault();
-    
+
     // 一度クリア
     en_text_subject = [];
     ja_text_subject = [];
@@ -38,7 +37,7 @@ $(document).ready(function() {
 
     //URI(/api/materialapi）に接続・dataobjectを渡す      
     $.post('/api/materialapi', dataobject).done(function(data) {
-      console.log( form.find('.main_word_submit')[0]);
+      console.log(form.find('.main_word_submit')[0]);
       //tokuhara add
       form.find('.main_word_submit')[0].blur();
       //data(オブジェクトで取得)を回す
@@ -63,9 +62,7 @@ $(document).ready(function() {
         });
       });
 
-      
-      // 　target.textContent = "GO!";
-      // 　change.textContent = "";
+
       //これでも、うまくいく↓
       // for (let i = 0; i < data.length; i++) {
 
@@ -87,15 +84,9 @@ $(document).ready(function() {
       const alerts = document.getElementById("alerts");
       const change = document.getElementById("change");
       const main_word = document.getElementById("main_word");
-      // const main_word_submit = document.getElementsByClassName("main_word_submit");
 
-      
-      change.textContent = "";
-      // const input_blur = () => {
-      //   main_word_submit.blur();
-      // }
       // 素材の表示
-      
+
       let num = 0;
 
       const set_img = (num) => {
@@ -106,12 +97,20 @@ $(document).ready(function() {
         en_text.textContent = en_text_subject[num];
       };
 
-      let inspace;
-        const set_en_type = (num) => {
+      const set_en_type = (num) => {
         const replaces = en_text_subject[num];
-        const replaceValue = / /gi;
-        inspace = replaces.replace(replaceValue, "_");
-        target.textContent = inspace;
+        const replaceValue = / /gi;　
+        const inspace = replaces.replace(replaceValue, "_");
+
+        let splitInspace = inspace.split('');
+
+        // 出力用の要素を作成
+        let spanAddInspace = "";
+        $.each(splitInspace, function(index, val) {
+          spanAddInspace += '<span class="spanOpacity">' + val + '</span>';
+        });
+        // HTMLに出力
+        target.innerHTML = spanAddInspace;
       };
 
       // 音声を流す
@@ -163,48 +162,46 @@ $(document).ready(function() {
 
       game_set(num);
 
-      // ドットインストールモデル追加
+      // タイピングが合っていたら、色を付ける
       let loc = 0;
 
-      function updateTarget() {
+      const updateTarget = () => {
 
-        change.textContent = en_text_subject[num].slice(0, loc);
-        target.textContent = inspace.slice(loc);
+        $(".spanOpacity").eq(loc).addClass("notOpacity");
+
       }
 
-      // const mainWordBtnBlur = () => {
-      //   main_word_submit.blur();
-      // }
 
       alertNavi(red, warning, "タイピングでスタート！");
-      
+
       window.addEventListener("keydown", (e) => {
-        // mainWordBtnBlur();
-        
+
         let key = e.key;
         let targetKey = en_text_subject[num][loc];
         console.log(targetKey);
-        
-        // main_word_submit.blur();
-        // window.blur();
 
         if (loc === 1) {
-          speechSynthesis.cancel();//音声のキューをクリア
+          //音声のキューをクリア
+          speechSynthesis.cancel();
+
           audio();
-          
+
         }
         // Enter以外のkey
         if (key !== "Enter") {
 
           if (key === targetKey || key === targetKey.toLowerCase()) {
             alertNavi(yellow, primary, "OK!");
-            loc++;
-            updateTarget();
 
+            updateTarget();
+            loc++;
             if (loc === en_text_subject[num].length) {
-              change.textContent = ja_text_subject[num];
-              speechSynthesis.cancel();//音声のキューをクリア
+              target.textContent = ja_text_subject[num];
+              //音声のキューをクリア
+              speechSynthesis.cancel();
+
               audio();
+
               alertNavi(blue, info, "次の問題へ（エンターキー）");
             }
           }
@@ -214,21 +211,17 @@ $(document).ready(function() {
         }
 
         else if (num < img_subject.length) {
-          change.textContent = "";
+          target.textContent = "";
           num++;
           alertNavi(red, warning, "タイピングでスタート！");
 
           if (num === img_subject.length) {
-            
-            // change.textContent = ""
-            // num = 0;
-            // game_set(num);
-            // loc = 0;
+
             en_text_subject.push("Choose a word from the left menu");
             ja_text_subject.push("左Menuから単語を選ぼう");
             img_subject.push("../img/good_job2.jpg");
             alertNavi(blue, primary, "よくできました！");
-            
+
           }
 
           game_set(num);
@@ -239,4 +232,3 @@ $(document).ready(function() {
     });
   });
 });
-

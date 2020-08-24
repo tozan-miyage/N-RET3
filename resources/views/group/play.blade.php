@@ -44,7 +44,8 @@
 
                         <!-- タイピング -->
                         <div>
-                            <span id="change"></span><p id="target">左Menuから単語を選ぼう</p>
+                            <!--<span id="change"></span><p id="target">左Menuから単語を選ぼう</p>-->
+                            <p id="target">左Menuから単語を選ぼう</p>
                         </div>
 
                         <div id="navi_area">

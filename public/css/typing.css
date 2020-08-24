@@ -252,7 +252,15 @@ footer .footer_area .col-12 a:hover {
     font-size: 32px;
     letter-spacing: 2px;
     display: inline;
-    opacity: 0.1;
+    /*opacity: 0.1;*/
+}
+
+.spanOpacity{
+    opacity:0.1;
+}
+
+.notOpacity{
+    opacity:1.0;
 }
 
 #navi_area {
