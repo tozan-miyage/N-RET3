@@ -18,7 +18,7 @@ $(document).ready(function() {
   let en_text_subject = [];
   let ja_text_subject = [];
   let img_subject = [];
-
+$.ajaxSetup({async:false});
   //formのmain_word_btn要素を取得・submitでイベント発火
   $("form.main_word_btn").submit(function(e) {
     //元々のイベントは、発火しないようにする。
@@ -29,9 +29,12 @@ $(document).ready(function() {
     ja_text_subject = [];
     img_subject = [];
 
-
+  $("#target").off();
     　　
     let form = $(this);
+    console.log($(`form#${$(this).attr('id')} .main_word_submit`));
+    //form.find('.main_word_submit')[0].addClass('disabled');
+   $(`form#${$(this).attr('id')} .main_word_submit`).prop('disabled', true);
     //dataobjectに、formの内容を格納（データを文字列に変換）serealize()
     let dataobject = $(this).serialize();
 
@@ -39,6 +42,8 @@ $(document).ready(function() {
     $.post('/api/materialapi', dataobject).done(function(data) {
       console.log(form.find('.main_word_submit')[0]);
       //tokuhara add
+      
+      $(`form#${form.attr('id')} .main_word_submit`).prop('disabled', false);
       form.find('.main_word_submit')[0].blur();
       //data(オブジェクトで取得)を回す
       data.forEach(object => {
@@ -114,10 +119,25 @@ $(document).ready(function() {
       };
 
       // 音声を流す
-      const audio = () => {
-        const text = en_text.textContent;
+      // const audio = () => {
+        // const text = en_text.textContent;
         // 発言を作成
-        const uttr = new SpeechSynthesisUtterance(text);
+        // const uttr = new SpeechSynthesisUtterance(text);
+        // 発話言語
+        // uttr.lang = "en-US";
+        // 速度 0.1-10 初期値:1 (倍速なら2, 半分の倍速なら0.5)
+        // uttr.rate = 0.8;
+        // 高さ 0-2 初期値:1
+        // uttr.pitch = 1.5;
+        // 音量 0-1 初期値:1
+        // uttr.volume = 0.75;
+        // 発言を再生 (発言キューに発言を追加)
+        // speechSynthesis.speak(uttr);
+      // };
+      // 音声を流す
+      const audio = (text) => {
+        // 発言を作成
+        let uttr = new SpeechSynthesisUtterance(text);
         // 発話言語
         uttr.lang = "en-US";
         // 速度 0.1-10 初期値:1 (倍速なら2, 半分の倍速なら0.5)
@@ -129,6 +149,8 @@ $(document).ready(function() {
         // 発言を再生 (発言キューに発言を追加)
         speechSynthesis.speak(uttr);
       };
+      
+      
 
       // const speakBtn = document.querySelector("#speak-btn");
 
@@ -161,7 +183,7 @@ $(document).ready(function() {
       };
 
       game_set(num);
-
+//何度も呼ばれている
       // タイピングが合っていたら、色を付ける
       let loc = 0;
 
@@ -171,25 +193,26 @@ $(document).ready(function() {
 
       }
 
-
       alertNavi(red, warning, "タイピングでスタート！");
-
+      
+//start ボタンで呼ぶようにする。ここが何度も呼ばれてインスタンスが生成されているのが問題です。
       window.addEventListener("keydown", (e) => {
 
         let key = e.key;
         let targetKey = en_text_subject[num][loc];
+        let text = en_text_subject[num];
         console.log(targetKey);
 
         if (loc === 1) {
           //音声のキューをクリア
           speechSynthesis.cancel();
 
-          audio();
+          audio(text);
 
         }
         // Enter以外のkey
         if (key !== "Enter") {
-
+          e.preventDefault();//これでエラーが消えた。う
           if (key === targetKey || key === targetKey.toLowerCase()) {
             alertNavi(yellow, primary, "OK!");
 
@@ -198,9 +221,9 @@ $(document).ready(function() {
             if (loc === en_text_subject[num].length) {
               target.textContent = ja_text_subject[num];
               //音声のキューをクリア
-              speechSynthesis.cancel();
+              // speechSynthesis.cancel();
 
-              audio();
+              audio(text);
 
               alertNavi(blue, info, "次の問題へ（エンターキー）");
             }
@@ -226,9 +249,9 @@ $(document).ready(function() {
 
           game_set(num);
           loc = 0;
-
         }
       });　
+      
     });
   });
 });

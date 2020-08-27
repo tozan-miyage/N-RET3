@@ -17,7 +17,7 @@
                         <ul class="list">
                             @foreach($materials as $material)
                             <li>
-                                <form class="main_word_btn" method="POST" action="">
+                                <form class="main_word_btn" id="form-word-{{ $material->id }}" method="POST" action="">
                                     @csrf
                                     <input type="hidden" name="material_id" value="{{ $material->id }}">
                                     <button class="main_word_submit" type="submit">{{ $material -> main_word }}</button>
