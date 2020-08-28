@@ -17,6 +17,7 @@
                         <ul class="list">
                             @foreach($materials as $material)
                             <li>
+                                <!--idを追加しました。tokuhara-->
                                 <form class="main_word_btn" id="form-word-{{ $material->id }}" method="POST" action="">
                                     @csrf
                                     <input type="hidden" name="material_id" value="{{ $material->id }}">
@@ -62,4 +63,15 @@
                 <!--    <p>スポンサーリンク</p>-->
                 <!--</div>-->
             </div>
+            <script>
+                // ブラウザでAPIが使用できるかの確認
+                const checkBrowser = () => {
+                    if ("speechSynthesis" in window) {
+                        alert("このブラウザは音声再生に対応しています。🎉");
+                    } else {
+                        alert("このブラウザは音声再生に対応していません。😭");
+                    }
+                };
+                    checkBrowser();
+            </script>
         @endsection
