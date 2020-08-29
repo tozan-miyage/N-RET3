@@ -256,6 +256,5 @@ $(document).ready(function() {
       game_set(num);
       loc = 0;
     }
-
   });　
 });

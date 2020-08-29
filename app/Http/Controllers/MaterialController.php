@@ -57,12 +57,11 @@ class MaterialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Material $material)
+    public function store(Request $request)
     {
-        
         // configure with favored image driver (gd by default)
-        Image::configure(array('driver' => 'imagick'));
-
+        // Image::configure(array('driver' => 'imagick'));
+        ini_set("memory_limit","256M");
         $material = new Material();
         
         if ($request->hasFile('photo')) {
@@ -77,10 +76,24 @@ class MaterialController extends Controller
                 $extension = $request->photo->extension();
                 //photoを保存する名前を決める
                 $name = "group-image-".time().".".$extension;
+                
+                // $path = storage_path($name);
+                $path = public_path('/storage/'.$name);
                 //リサイズする。
-                Image::make($request->photo)->resize(300, 200);
+                // Image::make($request->photo)->resize(300, 200);
+                
+                // リサイズしたものを、格納
+                $resizeImage = Image::make($request->photo)->resize(600, 400);
+                
                 //画像を/public/storage/に保存
-                $request->photo->storeAs('/public', $name);
+                // リサイズされていないと思う。変数じゃないから。
+                // $request->photo->storeAs('/public', $name);
+                
+                // storeAsは、GDとImagickで使えない
+                // $resizeImage->storeAs('/public', $name);
+                
+                // image.interventionは、save（path.ファイル名）で保存する
+                $resizeImage->save($path);
                 
                 //URLは$nameにする。
                 $url = Storage::url($name);
@@ -176,10 +189,12 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Material $material)
+    public function update(Request $request,Material $material)
     {
+        // メモリサイズを拡張（デフォルト128M)
+        ini_set("memory_limit","256M");
         
-        Image::configure(array('driver' => 'imagick'));
+        // Image::configure(array('driver' => 'imagick'));
         
         if ($request->hasFile('photo')) {
             //  Let's do everything here
@@ -187,23 +202,22 @@ class MaterialController extends Controller
                 //
                 $validated = $request->validate([
                     'image' => 'mimes:jpeg,png',
-                ]);//拡張子extension
+                ]);
+                //拡張子extensionを取得
                 $extension = $request->photo->extension();
-                
+                // img名を変更
                 $name = "group-image-".time().".".$extension;
-                
-                Image::make($request->photo)->resize(300, 200);
-                
-                $request->photo->storeAs('/public', $name);
-                
+                // imageをリサイズ
+                $resizeImage = Image::make($request->photo)->resize(600, 400);
+                // imageファイル保存先パス
+                $path = public_path('/storage/'.$name);
+                // リサイズしたimagepublic/storageに保存
+                $resizeImage->save($path);
+                // 保存したURLを取得
                 $url = Storage::url($name);
-                // $file = File::create([
-                //   'name' => $name,
-                //     'url' => $url,
-                // ]);
+                // URLをモデルに保存
                 $material->photo =  $url;
-              
-               
+                
             }
         }
         
