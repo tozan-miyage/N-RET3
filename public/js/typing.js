@@ -1,16 +1,19 @@
 $(document).ready(function() {
 
+  // 左サイドメニューソート機能変数
   let options = {
     valueNames: ['main_word_submit']
   };
-
   let mainWordsList = new List('main_words', options);
+  
+  // 素材セット変数
   let en_text_subject = [];
   let ja_text_subject = [];
   let img_subject = [];
   let num = 0;
-  let loc = 0
-
+  let loc = 0;
+  
+  // document要素取得
   const img_text = document.getElementById("img_text");
   const en_text = document.getElementById("en_text");
   const target = document.getElementById("target");
@@ -21,6 +24,7 @@ $(document).ready(function() {
   const main_word = document.getElementById("main_word");
   const search = document.getElementById("search");
 
+  // 画像をセット
   const set_img = (num) => {
     if (num === undefined) {
       img_text.src = "../img/vishwanath-surpur-MaXtz1BRD08-unsplash.jpg"
@@ -30,6 +34,7 @@ $(document).ready(function() {
     }
   };
 
+  // 英文素材をセット
   const set_en = (num) => {
     if (num === undefined) {
       en_text.textContent = "Choose a word from the left menu";
@@ -39,6 +44,7 @@ $(document).ready(function() {
     }
   };
 
+  // タイピング素材をセット
   const set_en_type = (num) => {
     if (num === undefined) {
       target.textContent = "左Menuから単語を選ぼう";
@@ -61,6 +67,7 @@ $(document).ready(function() {
     }
   };
 
+  // 全ての素材をセットする
   let game_set = (num) => {
     if (num === undefined) {
       set_img();
@@ -75,18 +82,19 @@ $(document).ready(function() {
     }
   };
 
-  // ロゴ変数
-  let red = "../img/logo1.jpg";
-  let yellow = "../img/logo2.jpg";　　　
-  let blue = "../img/logo3.jpg";
+  // ロゴ定数
+  const red = "../img/logo1.jpg";
+  const yellow = "../img/logo2.jpg";　　　
+  const blue = "../img/logo3.jpg";
 
   //alert変数
-  let primary = "alert alert-primary";
-  let danger = "alert alert-danger";
-  let warning = "alert alert-warning";
-  let info = "alert alert-info";
+  const primary = "alert alert-primary";
+  const danger = "alert alert-danger";
+  const warning = "alert alert-warning";
+  const info = "alert alert-info";
 
-  let alertNavi = (logo, alertClassName, text) => {
+  // アラートを表示
+  const alertNavi = (logo, alertClassName, text) => {
     logo_img.src = logo;
     alerts.className = alertClassName;
     alerts.textContent = text;
@@ -108,10 +116,12 @@ $(document).ready(function() {
     speechSynthesis.speak(uttr);
   };
 
+  // タイピングが合っていたら、文字色を付ける
   const updateTarget = () => {
     $(".spanOpacity").eq(loc).addClass("notOpacity");
   }
   
+  // 素材を初期化
   const clear = () =>{
     en_text_subject.length = 0;
     ja_text_subject.length = 0;
@@ -120,12 +130,14 @@ $(document).ready(function() {
     num = 0;
   }
 
+  // ゲーム初期化
   game_set();
-
-
+  
+  // 左サイドメニュー検索にフォーカスしたら
   search.addEventListener('focus', (event) => {
-    console.log('hei');
-    clear();
+    // 素材を初期化
+    clear(); 
+    // ゲームを初期化
     game_set();
   });
 
@@ -136,12 +148,12 @@ $(document).ready(function() {
     //元々のイベントは、発火しないようにする。
     e.preventDefault();
 
-    // 一度クリア
+    // 素材を初期化
     clear();
 
     $("#target").off();　　
     let form = $(this);
-    console.log($(`form#${$(this).attr('id')} .main_word_submit`));
+    // console.log($(`form#${$(this).attr('id')} .main_word_submit`));
     //form.find('.main_word_submit')[0].addClass('disabled');
     $(`form#${$(this).attr('id')} .main_word_submit`).prop('disabled', true);
     //dataobjectに、formの内容を格納（データを文字列に変換）serealize()
@@ -149,7 +161,7 @@ $(document).ready(function() {
 
     //URI(/api/materialapi）に接続・dataobjectを渡す      
     $.post('/api/materialapi', dataobject).done(function(data) {
-      console.log(form.find('.main_word_submit')[0]);
+      // console.log(form.find('.main_word_submit')[0]);
       //tokuhara add
 
       $(`form#${form.attr('id')} .main_word_submit`).prop('disabled', false);
@@ -177,6 +189,7 @@ $(document).ready(function() {
       });
     });
 
+    // 取得した素材をセット
     game_set(num);
 
     alertNavi(red, warning, "タイピングでスタート！");
@@ -185,8 +198,7 @@ $(document).ready(function() {
   });
 
 
-  
-  //start ボタンで呼ぶようにする。ここが何度も呼ばれてインスタンスが生成されているのが問題です。
+// 文字キーを押したらイベント発火
   window.addEventListener("keypress", (e) => {
     let key = e.key;
     let targetKey = en_text_subject[num][loc];
@@ -194,19 +206,15 @@ $(document).ready(function() {
     console.log(targetKey);
     console.log(key);
     
-    if (0 === undefined){
-      alertNavi(red, warning, "使えない英語タイピング");
-    }
-    
 
     if (loc === 1) {
       //音声のキューをクリア
       // speechSynthesis.cancel();
+      // 音声を流す
       audio(text);
-      search.blur();
-
     }
-    // Enter以外のkey
+    
+    // Enter以外のkeyなら
     if (key !== "Enter") {
       // e.preventDefault(); //これでエラーが消えた。
       if (key === targetKey || key === targetKey.toLowerCase()) {
@@ -218,7 +226,7 @@ $(document).ready(function() {
           target.textContent = ja_text_subject[num];
           //音声のキューをクリア
           // speechSynthesis.cancel();
-
+          //音声を流す
           audio(text);
 
           alertNavi(blue, info, "次の問題へ（エンターキー）");
@@ -229,6 +237,7 @@ $(document).ready(function() {
       }
     }
 
+    // Enterkeyなら
     else if (num < img_subject.length) {
       target.textContent = "";
       num++;
@@ -243,10 +252,10 @@ $(document).ready(function() {
 
       }
 
+      // 次の素材をセット
       game_set(num);
       loc = 0;
     }
-
 
   });　
 });
