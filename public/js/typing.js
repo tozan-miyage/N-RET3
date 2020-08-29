@@ -1,16 +1,15 @@
 $(document).ready(function() {
 
-  var options = {
+  let options = {
     valueNames: ['main_word_submit']
   };
 
   let mainWordsList = new List('main_words', options);
-
-  var en_text_subject = [];
-  var ja_text_subject = [];
-  var img_subject = [];
-  var num = 0;
-  var loc = 0
+  let en_text_subject = [];
+  let ja_text_subject = [];
+  let img_subject = [];
+  let num = 0;
+  let loc = 0
 
   const img_text = document.getElementById("img_text");
   const en_text = document.getElementById("en_text");
@@ -20,58 +19,81 @@ $(document).ready(function() {
   const alerts = document.getElementById("alerts");
   const change = document.getElementById("change");
   const main_word = document.getElementById("main_word");
+  const search = document.getElementById("search");
 
   const set_img = (num) => {
-    img_text.src = img_subject[num];
+    if (num === undefined) {
+      img_text.src = "../img/vishwanath-surpur-MaXtz1BRD08-unsplash.jpg"
+    }
+    else {
+      img_text.src = img_subject[num];
+    }
   };
 
   const set_en = (num) => {
-    en_text.textContent = en_text_subject[num];
+    if (num === undefined) {
+      en_text.textContent = "Choose a word from the left menu";
+    }
+    else {
+      en_text.textContent = en_text_subject[num];
+    }
   };
 
   const set_en_type = (num) => {
-    const replaces = en_text_subject[num];
-    const replaceValue = / /gi;　
-    const inspace = replaces.replace(replaceValue, "_");
+    if (num === undefined) {
+      target.textContent = "左Menuから単語を選ぼう";
+    }
+    else {
 
-    let splitInspace = inspace.split('');
+      const replaces = en_text_subject[num];
+      const replaceValue = / /gi;　
+      const inspace = replaces.replace(replaceValue, "_");
 
-    // 出力用の要素を作成
-    let spanAddInspace = "";
-    $.each(splitInspace, function(index, val) {
-      spanAddInspace += '<span class="spanOpacity">' + val + '</span>';
-    });
-    // HTMLに出力
-    target.innerHTML = spanAddInspace;
+      let splitInspace = inspace.split('');
+
+      // 出力用の要素を作成
+      let spanAddInspace = "";
+      $.each(splitInspace, function(index, val) {
+        spanAddInspace += '<span class="spanOpacity">' + val + '</span>';
+      });
+      // HTMLに出力
+      target.innerHTML = spanAddInspace;
+    }
   };
 
-let alertNavi = (logo, alertClassName, text) => {
-      logo_img.src = logo;
-      alerts.className = alertClassName;
-      alerts.textContent = text;
+  let game_set = (num) => {
+    if (num === undefined) {
+      set_img();
+      set_en();
+      set_en_type();
+      alertNavi(red, warning, "使えない英語タイピング");
     }
-
-    // ロゴ変数
-    let red = "../img/logo1.jpg";
-    let yellow = "../img/logo2.jpg";　　　
-    let blue = "../img/logo3.jpg";
-
-    //alert変数
-    let primary = "alert alert-primary";
-    let danger = "alert alert-danger";
-    let warning = "alert alert-warning";
-    let info = "alert alert-info";
-
-    // ロジック
-
-    let game_set = (num) => {
+    else {
       set_img(num);
       set_en(num);
       set_en_type(num);
-    };
-    
-    // 音声を流す
-    const audio = (text) => {
+    }
+  };
+
+  // ロゴ変数
+  let red = "../img/logo1.jpg";
+  let yellow = "../img/logo2.jpg";　　　
+  let blue = "../img/logo3.jpg";
+
+  //alert変数
+  let primary = "alert alert-primary";
+  let danger = "alert alert-danger";
+  let warning = "alert alert-warning";
+  let info = "alert alert-info";
+
+  let alertNavi = (logo, alertClassName, text) => {
+    logo_img.src = logo;
+    alerts.className = alertClassName;
+    alerts.textContent = text;
+  }
+
+  // 音声を流す
+  const audio = (text) => {
     // 発言を作成
     let uttr = new SpeechSynthesisUtterance(text);
     // 発話言語
@@ -85,12 +107,27 @@ let alertNavi = (logo, alertClassName, text) => {
     // 発言を再生 (発言キューに発言を追加)
     speechSynthesis.speak(uttr);
   };
-  
+
   const updateTarget = () => {
-
     $(".spanOpacity").eq(loc).addClass("notOpacity");
-
   }
+  
+  const clear = () =>{
+    en_text_subject.length = 0;
+    ja_text_subject.length = 0;
+    img_subject.length = 0;
+    loc = 0;
+    num = 0;
+  }
+
+  game_set();
+
+
+  search.addEventListener('focus', (event) => {
+    console.log('hei');
+    clear();
+    game_set();
+  });
 
 
   $.ajaxSetup({ async: false });
@@ -100,11 +137,7 @@ let alertNavi = (logo, alertClassName, text) => {
     e.preventDefault();
 
     // 一度クリア
-    en_text_subject.length = 0;
-    ja_text_subject.length = 0;
-    img_subject.length = 0;
-    loc =0;
-    num =0;
+    clear();
 
     $("#target").off();　　
     let form = $(this);
@@ -143,56 +176,39 @@ let alertNavi = (logo, alertClassName, text) => {
         });
       });
     });
-    
+
     game_set(num);
 
     alertNavi(red, warning, "タイピングでスタート！");
 
+    search.blur();
   });
-
-  //これでも、うまくいく↓
-  // for (let i = 0; i < data.length; i++) {
-
-  //   en_text_subject.push(data[i]['english']);
-
-  //   ja_text_subject.push(data[i]['japanese']);
-
-  //   let imageDataName = data[i]['photo'];
-
-  //   img_subject.push(`../img/${imageDataName}`);
-
-  // }
 
 
   
-
-  // const speakBtn = document.querySelector("#speak-btn");
-
-  // speakBtn.addEventListener("click", function () {
-  // アラート表示を変える
-
-
-  //何度も呼ばれている
-  // タイピングが合っていたら、色を付ける
-
   //start ボタンで呼ぶようにする。ここが何度も呼ばれてインスタンスが生成されているのが問題です。
-  window.addEventListener("keydown", (e) => {
-
+  window.addEventListener("keypress", (e) => {
     let key = e.key;
     let targetKey = en_text_subject[num][loc];
     let text = en_text_subject[num];
     console.log(targetKey);
+    console.log(key);
+    
+    if (0 === undefined){
+      alertNavi(red, warning, "使えない英語タイピング");
+    }
+    
 
     if (loc === 1) {
       //音声のキューをクリア
       // speechSynthesis.cancel();
-
       audio(text);
+      search.blur();
 
     }
     // Enter以外のkey
     if (key !== "Enter") {
-      e.preventDefault(); //これでエラーが消えた。う
+      // e.preventDefault(); //これでエラーが消えた。
       if (key === targetKey || key === targetKey.toLowerCase()) {
         alertNavi(yellow, primary, "OK!");
 

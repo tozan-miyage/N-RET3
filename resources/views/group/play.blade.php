@@ -8,7 +8,7 @@
                     <p>Menu</p>
                     <!--<form class="search_input" method="P">-->
                         <div class="search">
-                            <input class="search" placeholder="単語を検索" />
+                            <input id="search" placeholder="単語を検索" />
                         </div>
                     <!--</form>-->
                     
@@ -35,24 +35,24 @@
                     <div class="how_to_contents">
                         <!-- 課題の写真 -->
                         <div class="theme_img">
-                            <img id="img_text" src="/img/vishwanath-surpur-MaXtz1BRD08-unsplash.jpg" alt="イメージ画像が入ります" />
+                            <img id="img_text" src="" alt="イメージ画像が入ります" />
                         </div>
 
                         <!-- 写真を説明する英文 -->
                         <div id="theme_text_en" class="theme_text_en">
-                            <p id="en_text">Choose a word from the left menu</p>
+                            <p id="en_text"></p>
                         </div>
 
                         <!-- タイピング -->
                         <div>
                             <!--<span id="change"></span><p id="target">左Menuから単語を選ぼう</p>-->
-                            <p id="target">左Menuから単語を選ぼう</p>
+                            <p id="target"></p>
                         </div>
 
                         <div id="navi_area">
                             <div class="how_to_navi">
                                 <img id="logo_img" src="../img/logo1.jpg" alt="" />
-                            <span id="alerts" class="alert alert-warning">つかえない英語タイピング</span>
+                            <span id="alerts" class="alert alert-warning"></span>
                             
                             </div>
                         </div>
