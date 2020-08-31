@@ -56,18 +56,22 @@
                                         <span class="input-group-text" id="inputGroupFileAddon01">Photo file</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" name="photo" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                        <input type="file" name="photo" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept='image/*' onchange="loadImage(this);">
                                         <label class="custom-file-label" for="inputGroupFile01"></label>
                                     </div>
+                                    
                                 </div>
+                                
                             </li>
+                            
                             <li class="list-group-item">
                                 <button type="submit" class="btn btn-primary">CreateMaterial</button>
                             </li>
                         </ul>
-                        
                     </form>
-                    
+                </div>
+                <div id="preview_area">
+                  <p id="preview"></p>
                 </div>
             </div>
             <a href="/material/{{ $group -> id }}"　class="m-3">Main_words一覧に戻る</a>

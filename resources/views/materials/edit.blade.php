@@ -71,7 +71,7 @@
                                     <span class="input-group-text" id="inputGroupFileAddon01">Photo file</span>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" name="photo" value="{{ $material->photo }}"class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                    <input type="file" name="photo" value="{{ $material->photo }}"class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept='image/*' onchange="loadImage(this);">
                                         <label class="custom-file-label" for="inputGroupFile01"></label>
                                 </div>
                             </div>
@@ -83,6 +83,9 @@
                     </form>
                 </div>
             </div>
+            <div id="preview_area">
+                  <p id="preview"></p>
+                </div>
         </div>
     </div>
     
