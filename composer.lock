@@ -515,7 +515,6 @@
             },
             "suggest": {
                 "ext-gd": "to use GD library based image processing.",
-                "ext-imagick": "to use Imagick based image processing.",
                 "intervention/imagecache": "Caching extension for the Intervention Image library"
             },
             "type": "library",
@@ -553,7 +552,6 @@
             "keywords": [
                 "gd",
                 "image",
-                "imagick",
                 "laravel",
                 "thumbnail",
                 "watermark"
@@ -5733,7 +5731,6 @@
     "prefer-lowest": false,
     "platform": {
         "php": "~7.2.3",
-        "ext-imagick": "*",
         "ext-mbstring": "*"
     },
     "platform-dev": [],
