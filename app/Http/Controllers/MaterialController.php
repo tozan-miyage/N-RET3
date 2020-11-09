@@ -78,7 +78,7 @@ class MaterialController extends Controller
                 $name = "group-image-".time().".".$extension;
                 
                 // $path = storage_path($name);
-                $path = public_path('/storage/'.$name);
+                $path = public_path('html/storage/'.$name);
                 //リサイズする。
                 // Image::make($request->photo)->resize(300, 200);
                 
@@ -210,7 +210,7 @@ class MaterialController extends Controller
                 // imageをリサイズ
                 $resizeImage = Image::make($request->photo)->resize(600, 400);
                 // imageファイル保存先パス
-                $path = public_path('/storage/'.$name);
+                $path = public_path('html/storage/'.$name);
                 // リサイズしたimagepublic/storageに保存
                 $resizeImage->save($path);
                 // 保存したURLを取得
