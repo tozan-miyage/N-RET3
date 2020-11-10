@@ -195,7 +195,7 @@ class MaterialController extends Controller
         ini_set("memory_limit","256M");
         
         // Image::configure(array('driver' => 'imagick'));
-        
+        $material->update();
         if ($request->hasFile('photo')) {
             //  Let's do everything here
             if ($request->file('photo')->isValid()) {
@@ -229,10 +229,9 @@ class MaterialController extends Controller
         
         $material->japanese = $request->input('japanese');
         
-        // $material->photo = $request->input('photo');
+        //$material->photo = $request->input('photo');
         
-        $material->update();
-        
+        $material->save();
         // $main_word = $material->main_word;
         
         // $materials = Material::where('main_word',$main_word)->get();
